@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="true" userDefinedModelVersionIdentifier="">
-    <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
-        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22A400" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="GroupItem" representedClassName="GroupItem" syncable="YES">
+        <attribute name="impression" optional="YES" attributeType="String"/>
+        <attribute name="itemimage" optional="YES" attributeType="Binary"/>
+        <attribute name="itemtimestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="itemtitle" optional="YES" attributeType="String"/>
+        <attribute name="url" optional="YES" attributeType="String"/>
+        <relationship name="group" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Groups" inverseName="item" inverseEntity="Groups"/>
     </entity>
-    <elements>
-        <element name="Item" positionX="-63" positionY="-18" width="128" height="44"/>
-    </elements>
+    <entity name="Groups" representedClassName="Groups" syncable="YES">
+        <attribute name="category" optional="YES" attributeType="String"/>
+        <attribute name="groupimage" optional="YES" attributeType="Binary"/>
+        <attribute name="grouptimestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="grouptitle" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="item" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GroupItem" inverseName="group" inverseEntity="GroupItem"/>
+    </entity>
 </model>

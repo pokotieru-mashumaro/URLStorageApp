@@ -11,7 +11,7 @@ struct CategoryInfoView: View {
     @Environment(\.dismiss) private var dismiss
     var body: some View {
         List {
-            ForEach(Category.allCases, id: \.rawValue) { category in
+            ForEach(GroupColor.allCases, id: \.rawValue) { category in
                 HStack {
                     Circle()
                         .frame(width: 10)

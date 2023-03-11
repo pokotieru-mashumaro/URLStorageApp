@@ -37,12 +37,12 @@ final class GroupsHelper {
         }
     }
     
-    func saveData(title: String, category: String, image: Data?) {
+    func saveData(title: String, color: String, image: Data?) {
         let newitem = Groups(context: persistentContainer.viewContext)
         newitem.id = UUID()
         newitem.grouptimestamp = Date()
         newitem.grouptitle = title
-        newitem.category = category
+        newitem.color = color
         newitem.groupimage = image
         
         do {
@@ -53,5 +53,4 @@ final class GroupsHelper {
             print(error.localizedDescription)
         }
     }
-    
 }

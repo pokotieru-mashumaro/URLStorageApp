@@ -20,7 +20,7 @@ extension Groups {
     @NSManaged public var id: UUID?
     @NSManaged public var grouptitle: String?
     @NSManaged public var groupimage: Data?
-    @NSManaged public var category: String?
+    @NSManaged public var color: String?
     @NSManaged public var item: NSSet?
 
 }

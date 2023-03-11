@@ -155,7 +155,7 @@ struct MainView: View {
         if (groups.groupimage == nil) {
             ZStack {
                 RoundedRectangle(cornerRadius: 16)
-                    //.foregroundColor(taskGroup.category.color.opacity(0.25))
+                    .foregroundColor(getColor(color: groups.color ?? "").opacity(0.25))
                     .overlay {
                         ZStack {
                             Rectangle()
@@ -163,7 +163,7 @@ struct MainView: View {
                             
                             Text(groups.grouptitle ?? "")
                                 .font(.caption)
-                             //   .foregroundColor(taskGroup.category.color)
+                                .foregroundColor(getColor(color: groups.color ?? ""))
                         }
                         .frame(height: 30)
                         .vAlign(.bottom)
@@ -187,7 +187,7 @@ struct MainView: View {
                             
                             Text(groups.grouptitle ?? "")
                                 .font(.caption)
-                               // .foregroundColor(taskGroup.category.color)
+                                .foregroundColor(getColor(color: groups.color ?? ""))
                         }
                         .frame(height: 30)
                         .vAlign(.bottom)

@@ -21,8 +21,8 @@ struct addTaskGroupView: View {
     
     @State var titleText: String = ""
     
-//    @State private var taskCategory: Category = .general
-//    @State private var categoryColor: Color = Category.general.color
+    
+    @State private var groupColor: GroupColor = GroupColor.gray
     
     var body: some View {
         VStack(alignment: .leading, spacing: 30) {
@@ -62,35 +62,34 @@ struct addTaskGroupView: View {
                     .fill(.black.opacity(0.2))
                     .frame(height: 1)
                 
-                TitleView("カテゴリー", .gray)
+                TitleView("カラー", .gray)
                     .padding(.top, 15)
                 
                 LazyVGrid(columns: Array(repeating: .init(.flexible(), spacing: 20), count: 3), spacing: 15) {
-                    ForEach(Category.allCases, id: \.rawValue) { category in
-                        Text(category.rawValue.uppercased())
+                    ForEach(GroupColor.allCases, id: \.rawValue) { color in
+                        Text(color.rawValue.uppercased())
                             .font(.system(size: 12))
                             .hAlign(.center)
                             .padding(.vertical, 5)
                             .background {
                                 RoundedRectangle(cornerRadius: 5, style: .continuous)
-                                    .fill(category.color.opacity(0.25))
+                                    .fill(color.color.opacity(0.25))
                             }
-                            .foregroundColor(category.color)
+                            .foregroundColor(color.color)
                             .contentShape(Rectangle())
-//                            .onTapGesture {
-//                                DispatchQueue.main.async {
-//                                    taskCategory = category
-//                                    categoryColor = category.color
-//                                }
-//                            }
+                            .onTapGesture {
+                                DispatchQueue.main.async {
+                                    groupColor = color
+                                }
+                            }
                     }
                 }
                 .padding(.top, 5)
             }
 
             Button {
-                let category = "ckmkmk"
-                groupsHelper.saveData(title: titleText, category: category, image: selectedImageData)
+                let color = groupColor.name
+                groupsHelper.saveData(title: titleText, color: color, image: selectedImageData)
                 onAdd()
                 dismiss()
             } label: {
@@ -101,8 +100,7 @@ struct addTaskGroupView: View {
                     .foregroundColor(.white)
                     .background {
                         Capsule()
-//                            .fill(categoryColor.gradient)
-                            .fill(.blue)
+                            .fill(groupColor.color.gradient)
                     }
             }
             .padding(.bottom)
@@ -154,7 +152,7 @@ struct addTaskGroupView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 85, height: 85)
-                //.foregroundColor(categoryColor.opacity(0.5))
+                .foregroundColor(groupColor.color.opacity(0.5))
                 .foregroundColor(.blue)
 
         }

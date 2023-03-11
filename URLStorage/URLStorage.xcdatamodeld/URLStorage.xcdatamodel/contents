@@ -9,7 +9,7 @@
         <relationship name="group" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Groups" inverseName="item" inverseEntity="Groups"/>
     </entity>
     <entity name="Groups" representedClassName="Groups" syncable="YES">
-        <attribute name="category" optional="YES" attributeType="String"/>
+        <attribute name="color" optional="YES" attributeType="String"/>
         <attribute name="groupimage" optional="YES" attributeType="Binary"/>
         <attribute name="grouptimestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="grouptitle" optional="YES" attributeType="String"/>

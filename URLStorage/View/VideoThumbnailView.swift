@@ -27,7 +27,7 @@ struct VideoThumbnailView: View {
                 .clipped()
                 .cornerRadius(10)
         } else {
-            loadImage()
+            EmptyView()
         }
     }
 
@@ -54,7 +54,6 @@ struct VideoThumbnailView: View {
             .resizable()
             .aspectRatio(contentMode: .fill)
             .frame(width: 85, height: 85)
-//            .foregroundColor(taskGroup.category.color.opacity(0.5))
     }
 }
 

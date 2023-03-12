@@ -8,20 +8,15 @@
 import SwiftUI
 
 struct NavigationDestinationView: View {
+    @Environment(\.managedObjectContext) var context
     let groups: Groups
-    let folderItemHelper = GroupItemHelper()
+    let helper = CoreDataHelper()
     
     @State var addNewTask: Bool = false
     var onBack: () -> ()
     
-    private var groupItems: [GroupItem] {
-        if let groupItems = groups.item?.allObjects as? [GroupItem] {
-            return groupItems
-        } else {
-            return [GroupItem]()
-        }
-    }
-    
+    @State var groupItems: [GroupItem] = []
+        
     var body: some View {
         ScrollView {
             VStack {
@@ -29,6 +24,9 @@ struct NavigationDestinationView: View {
                     itemView(item: item)
                 }
             }
+        }
+        .onAppear {
+            groupItems = helper.getItem(groups: groups)
         }
         .navigationTitle(groups.grouptitle ?? "")
         .navigationBarTitleDisplayMode(.inline)
@@ -54,7 +52,10 @@ struct NavigationDestinationView: View {
             }
         }
         .fullScreenCover(isPresented: $addNewTask) {
-            addTaskView(groups: groups)
+            addTaskView(groups: groups) {
+               // groupItems = helper.getItem(context: context)
+                groupItems = helper.getItem(groups: groups)
+            }
         }
     }
     
@@ -63,12 +64,35 @@ struct NavigationDestinationView: View {
         VStack {
             HStack(spacing: 30) {
                 VideoThumbnailView(url: item.url ?? "")
+                    .foregroundColor(getColor(color: groups.color ?? "").opacity(0.5))
                 
                 Text(item.itemtitle ?? "")
+                    .foregroundColor(getColor(color: groups.color ?? ""))
                     .fontWeight(.semibold)
                 
                 Spacer()
             }
+            
+            HStack(spacing: 50) {
+                Text(dateToString(date: item.itemtimestamp))
+                    .foregroundColor(getColor(color: groups.color ?? "").opacity(0.5))
+                    .font(.caption2)
+                
+                if !(item.url?.isEmpty ?? false) {
+                    Link(destination: URL(string: item.url!)!) {
+                        Text("リンクへ移動")
+                            .frame(width: 150)
+                            .foregroundColor(getColor(color: groups.color ?? ""))
+                            .background {
+                                Capsule()
+                                    .fill(getColor(color: groups.color ?? "").opacity(0.5).gradient)
+                            }
+                    }
+                }
+                    
+                Spacer()
+            }
+            .frame(height: 25)
             
             if let impression = item.impression {
                 Text(impression)
@@ -81,7 +105,7 @@ struct NavigationDestinationView: View {
                 .fill(.black.opacity(0.2))
                 .frame(height: 1)
         }
-        .padding(30)
+        .padding([.horizontal, .top], 20)
     }
 }
 

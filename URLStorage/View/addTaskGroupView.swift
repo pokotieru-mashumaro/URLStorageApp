@@ -10,9 +10,10 @@ import PhotosUI
 
 struct addTaskGroupView: View {
     var onAdd: () -> ()
+    @Environment(\.managedObjectContext) var context
     @Environment(\.dismiss) private var dismiss
     
-    let groupsHelper = GroupsHelper()
+    let helper = CoreDataHelper()
     
     //photo関係
     @State var selectedImageData: Data?
@@ -82,6 +83,7 @@ struct addTaskGroupView: View {
                                     groupColor = color
                                 }
                             }
+                        
                     }
                 }
                 .padding(.top, 5)
@@ -89,7 +91,7 @@ struct addTaskGroupView: View {
 
             Button {
                 let color = groupColor.name
-                groupsHelper.saveData(title: titleText, color: color, image: selectedImageData)
+                helper.groupSave(context: context, title: titleText, color: color, image: selectedImageData)
                 onAdd()
                 dismiss()
             } label: {

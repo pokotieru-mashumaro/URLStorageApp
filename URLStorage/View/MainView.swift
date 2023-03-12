@@ -11,6 +11,7 @@ struct MainView: View {
     init() {
     UITextView.appearance().backgroundColor = .clear
     }
+    @Environment(\.managedObjectContext) var context
     @State var path: [Groups] = []
     @State var searchText: String = ""
     
@@ -21,11 +22,9 @@ struct MainView: View {
 //      )
 //      var groups: FetchedResults<Groups>
     @State var groups: [Groups] = []
-    let groupsHelper = GroupsHelper()
+    let helper = CoreDataHelper()
     
     @State var addNewGroup: Bool = false
-    @State var comeInfo: Bool = false
-    
     //Grid関係
     @State var columns = Array(repeating: GridItem(.flexible()), count: 2)
     @State var columnsNumber: CGFloat = 2
@@ -44,6 +43,24 @@ struct MainView: View {
                                 .foregroundColor(.black)
                                 .padding()
                                 .frame(width: gridWidth, height: gridWidth)
+                                .contextMenu {
+                                    Button(action: {
+                                        print("編集")
+                                    }) {
+                                        Text("編集")
+                                            .foregroundColor(.blue)
+                                    }
+                                    
+                                    Button(action: {
+                                        DispatchQueue.main.async {
+                                            context.delete(group)
+                                            groups = helper.getFolder(context: context)
+                                        }
+                                    }) {
+                                        Text("削除")
+                                            .foregroundColor(.red)
+                                    }
+                                }
                         }
 //                        NavigationLink(destination: {
 //                            NavigationDestinationView(folder: folder) {
@@ -59,7 +76,7 @@ struct MainView: View {
                 }
             }
             .onAppear {
-                groups = groupsHelper.getFolder()
+                groups = helper.getFolder(context: context)
             }
             .navigationDestination(for: Groups.self, destination: { items in
                 NavigationDestinationView(groups: items) {
@@ -67,14 +84,6 @@ struct MainView: View {
                 }
             })
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        comeInfo.toggle()
-                    } label: {
-                        Image(systemName: "info.circle")
-                    }
-                }
-                
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Menu {
                         Button("拡大/縮小") {
@@ -136,12 +145,8 @@ struct MainView: View {
         }
         .fullScreenCover(isPresented: $addNewGroup) {
             addTaskGroupView {
-                groups = groupsHelper.getFolder()
+                groups = helper.getFolder(context: context)
             }
-        }
-        .sheet(isPresented: $comeInfo) {
-            CategoryInfoView()
-                .presentationDetents([.medium])
         }
         .ignoresSafeArea()
     }

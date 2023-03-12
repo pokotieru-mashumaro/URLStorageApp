@@ -69,4 +69,10 @@ func getColor(color: String) -> Color {
     }
 }
 
- 
+func dateToString(date: Date?) -> String {
+    guard let date = date else { return "" }
+    let calendar = Calendar(identifier: .gregorian)
+    let dateComponents = calendar.dateComponents([.year, .month, .day], from: date)
+    let select_date: String = "\(dateComponents.year!)/\(dateComponents.month!)/\(dateComponents.day!)"
+    return select_date
+}

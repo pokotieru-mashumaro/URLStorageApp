@@ -10,7 +10,9 @@ import PhotosUI
 
 struct addTaskView: View {
     let groups: Groups
-    let groupItemHelper = GroupItemHelper()
+    var onNext: () -> ()
+    let helper = CoreDataHelper()
+    @Environment(\.managedObjectContext) var context
     @Environment(\.dismiss) private var dismiss
     
     //photo関係
@@ -51,6 +53,7 @@ struct addTaskView: View {
                 VStack(alignment: .leading, spacing: 10) {
                     HStack(spacing: 30) {
                         VideoThumbnailView(url: urlText)
+                            .foregroundColor(getColor(color: groups.color ?? "").opacity(0.5))
                             .padding(.leading, 10)
                             .onTapGesture {
                                 showImagePicker.toggle()
@@ -84,14 +87,14 @@ struct addTaskView: View {
                             .frame(height: 1)
                     }
                     
-                    Toggle("感想", isOn: $feelingFlag)
+                    Toggle("コメント", isOn: $feelingFlag)
                         .fontWeight(.bold)
                         .toggleStyle(SwitchToggleStyle(tint: .blue))
                     
                     if feelingFlag {
                         TextEditor(text: $articleText)
                             .scrollContentBackground(Visibility.hidden)
-                           // .background(taskGroup.category.color.opacity(0.3))
+                            .background(getColor(color: groups.color ?? "").opacity(0.3))
                             .foregroundColor(Color.black)
                             .hAlign(.center)
                             .frame(height: 250)
@@ -100,9 +103,8 @@ struct addTaskView: View {
                 }
                 
                 Button {
-                    
-                    groupItemHelper.saveData(title: titleText, image: selectedImageData, url: urlText, impression: articleText, group: groups)
-                    
+                    helper.itemSave(context: context, title: titleText, image: selectedImageData, url: urlText, impression: articleText, group: groups)
+                    onNext()
                     dismiss()
                 } label: {
                     Text("作成")
@@ -112,8 +114,8 @@ struct addTaskView: View {
                         .foregroundColor(.white)
                         .background {
                             Capsule()
-                               // .fill(taskGroup.category.color.gradient)
-                                .fill(Color.green)
+                                .fill(getColor(color: groups.color ?? "") .gradient)
+                            
                         }
                 }
                 .padding(.bottom)
@@ -165,7 +167,7 @@ struct addTaskView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 85, height: 85)
-              //  .foregroundColor(taskGroup.category.color.opacity(0.5))
+                .foregroundColor(getColor(color: groups.color ?? "").opacity(0.5))
 
         }
     }

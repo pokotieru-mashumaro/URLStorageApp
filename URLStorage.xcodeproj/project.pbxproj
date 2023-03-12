@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B96B80AE29BE07EF00C6FF73 /* FullScreenImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96B80AD29BE07EF00C6FF73 /* FullScreenImageView.swift */; };
 		B999219629BDE78900FAAE24 /* EditGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B999219529BDE78900FAAE24 /* EditGroupView.swift */; };
 		B999219829BDEC2300FAAE24 /* EditItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B999219729BDEC2300FAAE24 /* EditItemView.swift */; };
 		B9B8AABF29BB45DE007C36CA /* URLStorageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B8AABE29BB45DE007C36CA /* URLStorageApp.swift */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B96B80AD29BE07EF00C6FF73 /* FullScreenImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenImageView.swift; sourceTree = "<group>"; };
 		B999219529BDE78900FAAE24 /* EditGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGroupView.swift; sourceTree = "<group>"; };
 		B999219729BDEC2300FAAE24 /* EditItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemView.swift; sourceTree = "<group>"; };
 		B9B8AABB29BB45DE007C36CA /* URLStorage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = URLStorage.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,8 +115,9 @@
 			isa = PBXGroup;
 			children = (
 				B9B8AADA29BB4701007C36CA /* MainView.swift */,
-				B9B8AADC29BB473C007C36CA /* VideoThumbnailView.swift */,
 				B9B8AADE29BB4750007C36CA /* NavigationDestinationView.swift */,
+				B9B8AADC29BB473C007C36CA /* VideoThumbnailView.swift */,
+				B96B80AD29BE07EF00C6FF73 /* FullScreenImageView.swift */,
 				B9B8AAE629BB47CE007C36CA /* addTaskGroupView.swift */,
 				B9B8AAE829BB47E6007C36CA /* addTaskView.swift */,
 				B999219529BDE78900FAAE24 /* EditGroupView.swift */,
@@ -243,6 +246,7 @@
 				B9B8AAE729BB47CE007C36CA /* addTaskGroupView.swift in Sources */,
 				B9B8AADD29BB473C007C36CA /* VideoThumbnailView.swift in Sources */,
 				B9B8AADB29BB4701007C36CA /* MainView.swift in Sources */,
+				B96B80AE29BE07EF00C6FF73 /* FullScreenImageView.swift in Sources */,
 				B9B8AAF729BB4A72007C36CA /* GroupItem+CoreDataProperties.swift in Sources */,
 				B9B8AAF929BB4A72007C36CA /* Groups+CoreDataProperties.swift in Sources */,
 				B9B8AAC829BB45E0007C36CA /* Persistence.swift in Sources */,

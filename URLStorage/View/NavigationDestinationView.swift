@@ -19,6 +19,9 @@ struct NavigationDestinationView: View {
     
     @State var editKey: Bool = false
     
+    @State private var isZoomed = false
+    @State var zoomImage: GroupItem?
+    
     var onBack: () -> ()
     
     @State var groupItems: [GroupItem] = []
@@ -116,7 +119,10 @@ struct NavigationDestinationView: View {
                 HStack(spacing: 30) {
                     if item.itemimage == nil {
                         VideoThumbnailView(url: item.url ?? "")
-                            .foregroundColor(getColor(color: groups.color ?? "").opacity(0.5))
+                            .onTapGesture {
+                                zoomImage = item
+                                isZoomed.toggle()
+                            }
                     } else {
                         Image(uiImage: UIImage(data: item.itemimage!)!)
                             .resizable()
@@ -124,6 +130,10 @@ struct NavigationDestinationView: View {
                             .scaledToFill()
                             .clipped()
                             .cornerRadius(10)
+                            .onTapGesture {
+                                zoomImage = item
+                                isZoomed.toggle()
+                            }
                     }
                     
                     Text(item.itemtitle ?? "")
@@ -181,6 +191,9 @@ struct NavigationDestinationView: View {
         .sheet(isPresented: $editKey, content: {
             EditItemView(groupItem: item, selectedImageData: item.itemimage, titleText: item.itemtitle ?? "", urlText: item.url ?? "", articleText: item.impression ?? "")
         })
+        .fullScreenCover(isPresented: $isZoomed) {
+            FullScreenImageView(item: $zoomImage)
+        }
         .onTapGesture {
             guard deleteKey else { return }
             if deleteItems.contains(item) {

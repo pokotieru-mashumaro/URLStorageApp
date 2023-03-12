@@ -111,10 +111,38 @@ struct AddOrEditVideoThumbnailView: View {
     }
 }
 
-
-struct VideoThumbnailView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainView()
+struct FullScreenVideoThumbnailView: View {
+    let url: String
+    @State var thumbnailUrl: String?
+    
+    var body: some View {
+        VStack {
+            if let thumbnailUrl = thumbnailUrl {
+                KFImage.url(URL(string: thumbnailUrl))
+                    .resizable()
+            } else {
+                EmptyView()
+            }
+        }
+        .task {
+            thumbnailUrl = await getThumbnailUrl()
+        }
+    }
+    
+    //非同期にすれば完璧
+    private func getThumbnailUrl() async -> String? {
+        guard let url = URL(string: url) else {
+            return nil
+        }
+        
+        do {
+            let html = try String(contentsOf: url, encoding: .utf8)
+            let doc = try SwiftSoup.parse(html)
+            let thumbnail = try doc.select("meta[property=og:image]").first()
+            return try thumbnail?.attr("content")
+        } catch {
+            print("Error getting thumbnail URL: \(error.localizedDescription)")
+            return nil
+        }
     }
 }
-

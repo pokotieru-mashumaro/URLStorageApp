@@ -11,6 +11,7 @@ import Kingfisher
 
 struct VideoThumbnailView: View {
     let url: String
+    var add = false
 
     var body: some View {
         if let thumbnailUrl = getThumbnailUrl() {
@@ -27,7 +28,11 @@ struct VideoThumbnailView: View {
                 .clipped()
                 .cornerRadius(10)
         } else {
-            EmptyView()
+            if add {
+                loadImage()
+            } else {
+                EmptyView()
+            }
         }
     }
 

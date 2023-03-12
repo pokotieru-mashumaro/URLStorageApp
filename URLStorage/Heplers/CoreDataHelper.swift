@@ -82,4 +82,28 @@ final class CoreDataHelper {
             print(error.localizedDescription)
         }
     }
+    
+    func groupDelete(context: NSManagedObjectContext, group: Groups) {
+        context.delete(group)
+        do {
+            print("group削除完了")
+            try context.save()
+        }
+        catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func itemDelete(context: NSManagedObjectContext, items: [GroupItem]) {
+        for item in items {
+            context.delete(item)
+        }
+        do {
+            print("item削除完了")
+            try context.save()
+        }
+        catch {
+            print(error.localizedDescription)
+        }
+    }
 }

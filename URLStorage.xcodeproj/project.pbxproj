@@ -21,7 +21,6 @@
 		B9B8AAE529BB47B6007C36CA /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = B9B8AAE429BB47B6007C36CA /* Kingfisher */; };
 		B9B8AAE729BB47CE007C36CA /* addTaskGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B8AAE629BB47CE007C36CA /* addTaskGroupView.swift */; };
 		B9B8AAE929BB47E6007C36CA /* addTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B8AAE829BB47E6007C36CA /* addTaskView.swift */; };
-		B9B8AAED29BB481A007C36CA /* GroupItemHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B8AAEC29BB481A007C36CA /* GroupItemHelper.swift */; };
 		B9B8AAEF29BB4842007C36CA /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B8AAEE29BB4842007C36CA /* CoreDataHelper.swift */; };
 		B9B8AAF129BB48AC007C36CA /* GroupColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B8AAF029BB48AC007C36CA /* GroupColor.swift */; };
 		B9B8AAF629BB4A72007C36CA /* GroupItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B8AAF229BB4A72007C36CA /* GroupItem+CoreDataClass.swift */; };
@@ -45,7 +44,6 @@
 		B9B8AADE29BB4750007C36CA /* NavigationDestinationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationDestinationView.swift; sourceTree = "<group>"; };
 		B9B8AAE629BB47CE007C36CA /* addTaskGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addTaskGroupView.swift; sourceTree = "<group>"; };
 		B9B8AAE829BB47E6007C36CA /* addTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addTaskView.swift; sourceTree = "<group>"; };
-		B9B8AAEC29BB481A007C36CA /* GroupItemHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupItemHelper.swift; sourceTree = "<group>"; };
 		B9B8AAEE29BB4842007C36CA /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		B9B8AAF029BB48AC007C36CA /* GroupColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupColor.swift; sourceTree = "<group>"; };
 		B9B8AAF229BB4A72007C36CA /* GroupItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroupItem+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -132,7 +130,6 @@
 			isa = PBXGroup;
 			children = (
 				B9B8AAEE29BB4842007C36CA /* CoreDataHelper.swift */,
-				B9B8AAEC29BB481A007C36CA /* GroupItemHelper.swift */,
 			);
 			path = Heplers;
 			sourceTree = "<group>";
@@ -247,7 +244,6 @@
 				B9B8AABF29BB45DE007C36CA /* URLStorageApp.swift in Sources */,
 				B9B8AACB29BB45E0007C36CA /* URLStorage.xcdatamodeld in Sources */,
 				B9B8AAF629BB4A72007C36CA /* GroupItem+CoreDataClass.swift in Sources */,
-				B9B8AAED29BB481A007C36CA /* GroupItemHelper.swift in Sources */,
 				B9B8AAD729BB46C1007C36CA /* DataExtension.swift in Sources */,
 				B9B8AAF129BB48AC007C36CA /* GroupColor.swift in Sources */,
 				B9B8AAEF29BB4842007C36CA /* CoreDataHelper.swift in Sources */,

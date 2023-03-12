@@ -9,7 +9,6 @@ import SwiftUI
 import PhotosUI
 
 struct addTaskGroupView: View {
-    var onAdd: () -> ()
     @Environment(\.managedObjectContext) var context
     @Environment(\.dismiss) private var dismiss
     
@@ -21,9 +20,8 @@ struct addTaskGroupView: View {
     @State var photoItem: PhotosPickerItem?
     
     @State var titleText: String = ""
-    
-    
     @State private var groupColor: GroupColor = GroupColor.gray
+    var onAdd: () -> ()
     
     var body: some View {
         VStack(alignment: .leading, spacing: 30) {

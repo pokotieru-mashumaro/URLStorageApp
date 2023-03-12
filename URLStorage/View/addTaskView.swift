@@ -52,12 +52,16 @@ struct addTaskView: View {
                 
                 VStack(alignment: .leading, spacing: 10) {
                     HStack(spacing: 30) {
-                        VideoThumbnailView(url: urlText)
-                            .foregroundColor(getColor(color: groups.color ?? "").opacity(0.5))
-                            .padding(.leading, 10)
-                            .onTapGesture {
-                                showImagePicker.toggle()
-                            }
+                        if selectedImageData == nil {
+                            VideoThumbnailView(url: urlText, add: true)
+                                .foregroundColor(getColor(color: groups.color ?? "").opacity(0.5))
+                                .padding(.leading, 10)
+                                .onTapGesture {
+                                    showImagePicker.toggle()
+                                }
+                        } else {
+                            photoView()
+                        }
                         
                         VStack {
                             TitleView("タイトル", .gray)

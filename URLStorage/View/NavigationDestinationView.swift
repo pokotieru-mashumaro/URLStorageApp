@@ -13,10 +13,14 @@ struct NavigationDestinationView: View {
     let helper = CoreDataHelper()
     
     @State var addNewTask: Bool = false
+    
+    @State var deleteKey: Bool = false
+    @State var deleteItems: [GroupItem] = []
+    
     var onBack: () -> ()
     
     @State var groupItems: [GroupItem] = []
-        
+    
     var body: some View {
         ScrollView {
             VStack {
@@ -31,6 +35,30 @@ struct NavigationDestinationView: View {
         .navigationTitle(groups.grouptitle ?? "")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
+        .overlay {
+            if deleteKey {
+                VStack {
+                    Spacer()
+                    
+                    Button {
+                        helper.itemDelete(context: context, items: deleteItems)
+                        groupItems = helper.getItem(groups: groups)
+                        deleteKey.toggle()
+                    } label: {
+                        Text("削除")
+                            .font(.title3)
+                            .fontWeight(.semibold)
+                            .frame(width: 300, height: 50)
+                            .foregroundColor(.white)
+                            .background {
+                                Capsule()
+                                    .fill(getColor(color: groups.color ?? "").gradient)
+                            }
+                    }
+                    .padding(.bottom)
+                }
+            }
+        }
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: {
@@ -45,15 +73,32 @@ struct NavigationDestinationView: View {
             
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
-                    addNewTask.toggle()
+                    deleteKey.toggle()
                 } label: {
-                    Image(systemName: "plus")
+                    //                    Image(systemName: "ellipsis")
+                    //                        .rotationEffect(.init(degrees: 90))
+                    //                        .scaleEffect(0.8)
+                    Text("削除")
+                        .foregroundColor(.red)
+                }
+            }
+            
+            ToolbarItem(placement: .bottomBar) {
+                if !deleteKey {
+                    Button {
+                        addNewTask.toggle()
+                    } label: {
+                        Image(systemName: "plus")
+                            .foregroundColor(.blue)
+                            .font(.title)
+                    }
+                    .offset(y: -10)
+                    .hAlign(.trailing)
                 }
             }
         }
         .fullScreenCover(isPresented: $addNewTask) {
             addTaskView(groups: groups) {
-               // groupItems = helper.getItem(context: context)
                 groupItems = helper.getItem(groups: groups)
             }
         }
@@ -61,51 +106,79 @@ struct NavigationDestinationView: View {
     
     @ViewBuilder
     func itemView(item: GroupItem) -> some View {
-        VStack {
-            HStack(spacing: 30) {
-                VideoThumbnailView(url: item.url ?? "")
-                    .foregroundColor(getColor(color: groups.color ?? "").opacity(0.5))
-                
-                Text(item.itemtitle ?? "")
+        HStack {
+            if deleteKey {
+                Image(systemName: deleteItems.contains(item) ? "checkmark.circle.fill" : "checkmark.circle")
+                    .resizable()
                     .foregroundColor(getColor(color: groups.color ?? ""))
-                    .fontWeight(.semibold)
-                
-                Spacer()
+                    .frame(width: 20, height: 20)
+                    .offset(x: 15)
             }
             
-            HStack(spacing: 50) {
-                Text(dateToString(date: item.itemtimestamp))
-                    .foregroundColor(getColor(color: groups.color ?? "").opacity(0.5))
-                    .font(.caption2)
-                
-                if !(item.url?.isEmpty ?? false) {
-                    Link(destination: URL(string: item.url!)!) {
-                        Text("リンクへ移動")
-                            .frame(width: 150)
-                            .foregroundColor(getColor(color: groups.color ?? ""))
-                            .background {
-                                Capsule()
-                                    .fill(getColor(color: groups.color ?? "").opacity(0.5).gradient)
-                            }
+            VStack {
+                HStack(spacing: 30) {
+                    if item.itemimage == nil {
+                        VideoThumbnailView(url: item.url ?? "")
+                            .foregroundColor(getColor(color: groups.color ?? "").opacity(0.5))
+                    } else {
+                        Image(uiImage: UIImage(data: item.itemimage!)!)
+                            .resizable()
+                            .frame(width: 100, height: 80)
+                            .scaledToFill()
+                            .clipped()
+                            .cornerRadius(10)
                     }
-                }
                     
-                Spacer()
+                    Text(item.itemtitle ?? "")
+                        .foregroundColor(getColor(color: groups.color ?? ""))
+                        .fontWeight(.semibold)
+                    
+                    Spacer()
+                }
+                
+                HStack(spacing: 50) {
+                    Text(dateToString(date: item.itemtimestamp))
+                        .foregroundColor(getColor(color: groups.color ?? "").opacity(0.5))
+                        .font(.caption2)
+                    
+                    if !(item.url?.isEmpty ?? false) {
+                        Link(destination: URL(string: item.url!)!) {
+                            Text("リンクへ移動")
+                                .frame(width: 150)
+                                .foregroundColor(getColor(color: groups.color ?? ""))
+                                .background {
+                                    Capsule()
+                                        .fill(getColor(color: groups.color ?? "").opacity(0.5).gradient)
+                                }
+                        }
+                    }
+                    
+                    Spacer()
+                }
+                .frame(height: 25)
+                
+                if let impression = item.impression {
+                    Text(impression)
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                        .hAlign(.leading)
+                }
+                
+                Rectangle()
+                    .fill(.black.opacity(0.2))
+                    .frame(height: 1)
             }
-            .frame(height: 25)
-            
-            if let impression = item.impression {
-                Text(impression)
-                    .font(.caption)
-                    .foregroundColor(.gray)
-                    .hAlign(.leading)
-            }
-            
-            Rectangle()
-                .fill(.black.opacity(0.2))
-                .frame(height: 1)
+            .padding([.horizontal, .top], 20)
         }
-        .padding([.horizontal, .top], 20)
+        .contentShape(Rectangle())
+        .onTapGesture {
+            guard deleteKey else { return }
+            if deleteItems.contains(item) {
+                deleteItems.removeAll(where: {$0 == item})
+            } else {
+                deleteItems.append(item)
+            }
+        }
     }
 }
 

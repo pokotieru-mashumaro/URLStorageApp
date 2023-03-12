@@ -25,6 +25,7 @@ struct MainView: View {
     let helper = CoreDataHelper()
     
     @State var addNewGroup: Bool = false
+    @State var editGroup: Bool = false
     //Grid関係
     @State var columns = Array(repeating: GridItem(.flexible()), count: 2)
     @State var columnsNumber: CGFloat = 2
@@ -53,7 +54,7 @@ struct MainView: View {
                                     
                                     Button(action: {
                                         DispatchQueue.main.async {
-                                            context.delete(group)
+                                            helper.groupDelete(context: context, group: group)
                                             groups = helper.getFolder(context: context)
                                         }
                                     }) {
@@ -61,17 +62,10 @@ struct MainView: View {
                                             .foregroundColor(.red)
                                     }
                                 }
+                                .fullScreenCover(isPresented: $editGroup) {
+                                 
+                            }
                         }
-//                        NavigationLink(destination: {
-//                            NavigationDestinationView(folder: folder) {
-//                                popToRoot()
-//                            }
-//                        }, label: {
-//                            gridView(folder: folder)
-//                                .foregroundColor(.black)
-//                                .padding()
-//                                .frame(width: gridWidth, height: gridWidth)
-//                        })
                     }
                 }
             }
@@ -203,6 +197,24 @@ struct MainView: View {
         }
     }
     
+    private func getGroupColor(color: String) -> GroupColor {
+        switch color {
+        case "gray":
+            return GroupColor.gray
+        case "green":
+            return GroupColor.green
+        case "pink":
+            return GroupColor.pink
+        case "blue":
+            return GroupColor.blue
+        case "purple":
+            return GroupColor.purple
+        case "brown":
+            return GroupColor.brown
+        default:
+            return GroupColor.gray
+        }
+    }
 }
 
 struct MainView_Previews: PreviewProvider {

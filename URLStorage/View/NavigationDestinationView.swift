@@ -17,6 +17,8 @@ struct NavigationDestinationView: View {
     @State var deleteKey: Bool = false
     @State var deleteItems: [GroupItem] = []
     
+    @State var editKey: Bool = false
+    
     var onBack: () -> ()
     
     @State var groupItems: [GroupItem] = []
@@ -72,15 +74,10 @@ struct NavigationDestinationView: View {
             }
             
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button {
-                    deleteKey.toggle()
-                } label: {
-                    //                    Image(systemName: "ellipsis")
-                    //                        .rotationEffect(.init(degrees: 90))
-                    //                        .scaleEffect(0.8)
-                    Text("削除")
-                        .foregroundColor(.red)
-                }
+                    Button("削除") {
+                        deleteKey.toggle()
+                    }
+                    .foregroundColor(.red)
             }
             
             ToolbarItem(placement: .bottomBar) {
@@ -134,6 +131,12 @@ struct NavigationDestinationView: View {
                         .fontWeight(.semibold)
                     
                     Spacer()
+                    
+                    Button("編集") {
+                        editKey.toggle()
+                    }
+                    .foregroundColor(getColor(color: groups.color ?? "").opacity(0.7))
+                    .vAlign(.topTrailing)
                 }
                 
                 HStack(spacing: 50) {
@@ -171,6 +174,9 @@ struct NavigationDestinationView: View {
             .padding([.horizontal, .top], 20)
         }
         .contentShape(Rectangle())
+        .sheet(isPresented: $editKey, content: {
+            EditItemView(groupItem: item, selectedImageData: item.itemimage, titleText: item.itemtitle ?? "", urlText: item.url ?? "", articleText: item.impression ?? "")
+        })
         .onTapGesture {
             guard deleteKey else { return }
             if deleteItems.contains(item) {

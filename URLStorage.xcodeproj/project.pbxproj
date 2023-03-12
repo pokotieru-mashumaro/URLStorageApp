@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B999219629BDE78900FAAE24 /* EditGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B999219529BDE78900FAAE24 /* EditGroupView.swift */; };
+		B999219829BDEC2300FAAE24 /* EditItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B999219729BDEC2300FAAE24 /* EditItemView.swift */; };
 		B9B8AABF29BB45DE007C36CA /* URLStorageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B8AABE29BB45DE007C36CA /* URLStorageApp.swift */; };
 		B9B8AAC329BB45E0007C36CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9B8AAC229BB45E0007C36CA /* Assets.xcassets */; };
 		B9B8AAC629BB45E0007C36CA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9B8AAC529BB45E0007C36CA /* Preview Assets.xcassets */; };
@@ -30,6 +32,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B999219529BDE78900FAAE24 /* EditGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGroupView.swift; sourceTree = "<group>"; };
+		B999219729BDEC2300FAAE24 /* EditItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemView.swift; sourceTree = "<group>"; };
 		B9B8AABB29BB45DE007C36CA /* URLStorage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = URLStorage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9B8AABE29BB45DE007C36CA /* URLStorageApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLStorageApp.swift; sourceTree = "<group>"; };
 		B9B8AAC229BB45E0007C36CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -113,6 +117,8 @@
 				B9B8AADE29BB4750007C36CA /* NavigationDestinationView.swift */,
 				B9B8AAE629BB47CE007C36CA /* addTaskGroupView.swift */,
 				B9B8AAE829BB47E6007C36CA /* addTaskView.swift */,
+				B999219529BDE78900FAAE24 /* EditGroupView.swift */,
+				B999219729BDEC2300FAAE24 /* EditItemView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -249,6 +255,8 @@
 				B9B8AAEF29BB4842007C36CA /* CoreDataHelper.swift in Sources */,
 				B9B8AADF29BB4750007C36CA /* NavigationDestinationView.swift in Sources */,
 				B9B8AAE929BB47E6007C36CA /* addTaskView.swift in Sources */,
+				B999219629BDE78900FAAE24 /* EditGroupView.swift in Sources */,
+				B999219829BDEC2300FAAE24 /* EditItemView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

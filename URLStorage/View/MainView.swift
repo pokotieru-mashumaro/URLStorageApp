@@ -46,7 +46,7 @@ struct MainView: View {
                                 .frame(width: gridWidth, height: gridWidth)
                                 .contextMenu {
                                     Button(action: {
-                                        print("編集")
+                                        editGroup.toggle()
                                     }) {
                                         Text("編集")
                                             .foregroundColor(.blue)
@@ -62,9 +62,9 @@ struct MainView: View {
                                             .foregroundColor(.red)
                                     }
                                 }
-                                .fullScreenCover(isPresented: $editGroup) {
-                                 
-                            }
+                                .sheet(isPresented: $editGroup) {
+                                    EditGroupView(group: group, selectedImageData: group.groupimage, titleText: group.grouptitle ?? "", groupColor: getGroupColor(color: group.color ?? "")) 
+                                }
                         }
                     }
                 }

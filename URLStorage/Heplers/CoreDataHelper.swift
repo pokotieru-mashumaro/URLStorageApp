@@ -106,4 +106,33 @@ final class CoreDataHelper {
             print(error.localizedDescription)
         }
     }
+    
+    func groupEdit(context: NSManagedObjectContext, group: Groups, title: String, color: String, image: Data?) {
+        group.grouptimestamp = Date()
+        group.grouptitle = title
+        group.color = color
+        group.groupimage = image
+        
+        do {
+            try context.save()
+        }
+        catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func itemEdit(context: NSManagedObjectContext, item: GroupItem, title: String, image: Data?, url: String?, impression: String?) {
+        item.itemtimestamp = Date()
+        item.itemtitle = title
+        item.itemimage = image
+        item.url = url
+        item.impression = impression
+        
+        do {
+            try context.save()
+        }
+        catch {
+            print(error.localizedDescription)
+        }
+    }
 }

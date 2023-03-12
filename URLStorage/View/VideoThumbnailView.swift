@@ -12,32 +12,38 @@ import Kingfisher
 struct VideoThumbnailView: View {
     let url: String
     var add = false
+    @State var thumbnailUrl: String?
 
     var body: some View {
-        if let thumbnailUrl = getThumbnailUrl() {
-            KFImage.url(URL(string: thumbnailUrl))
-                .placeholder {
-                    Color.gray
-                }
-                .resizable()
-                .placeholder {
-                    loadImage()
-                }
-                .frame(width: 100, height: 80)
-                .scaledToFill()
-                .clipped()
-                .cornerRadius(10)
-        } else {
-            if add {
-                loadImage()
+        VStack {
+            if let thumbnailUrl = thumbnailUrl {
+                KFImage.url(URL(string: thumbnailUrl))
+                    .placeholder {
+                        Color.gray
+                    }
+                    .resizable()
+                    .placeholder {
+                        loadImage()
+                    }
+                    .frame(width: 100, height: 80)
+                    .scaledToFill()
+                    .clipped()
+                    .cornerRadius(10)
             } else {
-                EmptyView()
+                if add {
+                    loadImage()
+                } else {
+                    EmptyView()
+                }
             }
+        }
+        .task {
+            thumbnailUrl = await getThumbnailUrl()
         }
     }
 
     //非同期にすれば完璧
-    private func getThumbnailUrl() -> String? {
+    private func getThumbnailUrl() async -> String? {
         guard let url = URL(string: url) else {
             return nil
         }

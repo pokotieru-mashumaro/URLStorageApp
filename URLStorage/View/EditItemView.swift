@@ -1,16 +1,15 @@
 //
-//  addTaskView.swift
+//  EditItemView.swift
 //  URLStorage
 //
-//  Created by iniad on 2023/03/10.
+//  Created by iniad on 2023/03/12.
 //
 
 import SwiftUI
 import PhotosUI
 
-struct addTaskView: View {
-    let groups: Groups
-    var onNext: () -> ()
+struct EditItemView: View {
+    let groupItem: GroupItem
     let helper = CoreDataHelper()
     @Environment(\.managedObjectContext) var context
     @Environment(\.dismiss) private var dismiss
@@ -21,13 +20,10 @@ struct addTaskView: View {
     @State var photoItem: PhotosPickerItem?
     
     @State var titleText: String = ""
+    @State var urlText: String = ""
     @State var articleText: String = ""
     
-    @State var urlFlag: Bool = false
-    @State var feelingFlag: Bool = false
-    @State var urlText: String = ""
-    @State var feelingText: String = ""
-        
+    
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: 30) {
@@ -47,14 +43,14 @@ struct addTaskView: View {
                     
                     Spacer()
                     
-                    Text(Date().toString("YYYY/MM/DD"))
+                    Text(dateToString(date: Date()))
                 }
                 
                 VStack(alignment: .leading, spacing: 10) {
                     HStack(spacing: 30) {
                         if selectedImageData == nil {
                             VideoThumbnailView(url: urlText, add: true)
-                                .foregroundColor(getColor(color: groups.color ?? "").opacity(0.5))
+                                .foregroundColor(getColor(color: groupItem.group?.color ?? "").opacity(0.5))
                                 .padding(.leading, 10)
                                 .onTapGesture {
                                     showImagePicker.toggle()
@@ -79,46 +75,39 @@ struct addTaskView: View {
                     TitleView("詳細（任意）", .gray)
                         .padding(.top, 15)
                     
-                    Toggle("URL", isOn: $urlFlag)
-                        .fontWeight(.bold)
-                        .toggleStyle(SwitchToggleStyle(tint: .blue))
+                    TitleView("URL", .gray)
+                        .hAlign(.leading)
                     
-                    if urlFlag {
-                        TextField("URL", text: $urlText)
-                            .keyboardType(.URL)
-                        Rectangle()
-                            .fill(.black.opacity(0.2))
-                            .frame(height: 1)
-                    }
+                    TextField("URL", text: $urlText)
+                        .keyboardType(.URL)
+                    Rectangle()
+                        .fill(.black.opacity(0.2))
+                        .frame(height: 1)
                     
-                    Toggle("コメント", isOn: $feelingFlag)
-                        .fontWeight(.bold)
-                        .toggleStyle(SwitchToggleStyle(tint: .blue))
+                    TitleView("コメント", .gray)
+                        .hAlign(.leading)
+                    TextEditor(text: $articleText)
+                        .scrollContentBackground(Visibility.hidden)
+                        .background(getColor(color: groupItem.group?.color ?? "").opacity(0.3))
+                        .foregroundColor(Color.black)
+                        .hAlign(.center)
+                        .frame(height: 250)
+                        .cornerRadius(25)
                     
-                    if feelingFlag {
-                        TextEditor(text: $articleText)
-                            .scrollContentBackground(Visibility.hidden)
-                            .background(getColor(color: groups.color ?? "").opacity(0.3))
-                            .foregroundColor(Color.black)
-                            .hAlign(.center)
-                            .frame(height: 250)
-                            .cornerRadius(25)
-                    }
                 }
                 
                 Button {
-                    helper.itemSave(context: context, title: titleText, image: selectedImageData, url: urlText, impression: articleText, group: groups)
-                    onNext()
+                    helper.itemEdit(context: context, item: groupItem, title: titleText, image: selectedImageData, url: urlText, impression: articleText)
                     dismiss()
                 } label: {
-                    Text("作成")
+                    Text("編集")
                         .font(.title3)
                         .fontWeight(.semibold)
                         .frame(width: 300, height: 50)
                         .foregroundColor(.white)
                         .background {
                             Capsule()
-                                .fill(getColor(color: groups.color ?? "") .gradient)
+                                .fill(getColor(color: groupItem.group?.color ?? "").gradient)
                             
                         }
                 }
@@ -165,21 +154,21 @@ struct addTaskView: View {
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 85, height: 85)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
-                
+            
         } else {
             Image(systemName: "photo")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 85, height: 85)
-                .foregroundColor(getColor(color: groups.color ?? "").opacity(0.5))
-
+                .foregroundColor(getColor(color: groupItem.group?.color ?? "").opacity(0.5))
+            
         }
     }
+    
 }
 
-struct addTaskView_Previews: PreviewProvider {
+struct EditItemView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
     }
 }
-

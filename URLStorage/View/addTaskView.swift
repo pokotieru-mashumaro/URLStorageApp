@@ -47,13 +47,13 @@ struct addTaskView: View {
                     
                     Spacer()
                     
-                    Text(Date().toString("YYYY/MM/DD"))
+                    Text(dateToString(date: Date()))
                 }
                 
                 VStack(alignment: .leading, spacing: 10) {
                     HStack(spacing: 30) {
                         if selectedImageData == nil {
-                            VideoThumbnailView(url: urlText, add: true)
+                            AddOrEditVideoThumbnailView(url: $urlText)
                                 .foregroundColor(getColor(color: groups.color ?? "").opacity(0.5))
                                 .padding(.leading, 10)
                                 .onTapGesture {

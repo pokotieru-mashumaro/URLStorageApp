@@ -154,6 +154,10 @@ struct NavigationDestinationView: View {
                                         .fill(getColor(color: groups.color ?? "").opacity(0.5).gradient)
                                 }
                         }
+                        .onTapGesture {
+                            item.itemtimestamp = Date()
+                            try! context.save()
+                        }
                     }
                     
                     Spacer()

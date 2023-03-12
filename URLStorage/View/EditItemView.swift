@@ -49,7 +49,7 @@ struct EditItemView: View {
                 VStack(alignment: .leading, spacing: 10) {
                     HStack(spacing: 30) {
                         if selectedImageData == nil {
-                            VideoThumbnailView(url: urlText, add: true)
+                            AddOrEditVideoThumbnailView(url: $urlText)
                                 .foregroundColor(getColor(color: groupItem.group?.color ?? "").opacity(0.5))
                                 .padding(.leading, 10)
                                 .onTapGesture {

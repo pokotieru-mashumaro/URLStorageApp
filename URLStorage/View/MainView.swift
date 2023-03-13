@@ -26,6 +26,7 @@ struct MainView: View {
     
     @State var addNewGroup: Bool = false
     @State var editGroup: Bool = false
+    @State var deleteAlert: Bool = false
     //Grid関係
     @State var columns = Array(repeating: GridItem(.flexible()), count: 2)
     @State var columnsNumber: CGFloat = 2
@@ -41,29 +42,35 @@ struct MainView: View {
                     ForEach(groups) { group in
                         NavigationLink(value: group) {
                             gridView(groups: group)
-                                .foregroundColor(.black)
                                 .padding()
                                 .frame(width: gridWidth, height: gridWidth)
                                 .contextMenu {
                                     Button(action: {
                                         editGroup.toggle()
                                     }) {
-                                        Text("編集")
-                                            .foregroundColor(.blue)
+                                        Label("編集", systemImage: "pencil")
                                     }
                                     
                                     Button(action: {
+                                        deleteAlert.toggle()
+                                    }) {
+                                        Label("削除", systemImage: "trash")
+                                    }
+                                    .foregroundColor(.red)
+                                }
+                                .sheet(isPresented: $editGroup) {
+                                    EditGroupView(group: group, selectedImageData: group.groupimage, titleText: group.grouptitle ?? "", groupColor: getGroupColor(color: group.color ?? "")) 
+                                }
+                                .alert("警告", isPresented: $deleteAlert){
+                                    Button("削除", role: .destructive){
+                                        // データ削除処理
                                         DispatchQueue.main.async {
                                             helper.groupDelete(context: context, group: group)
                                             groups = helper.getFolder(context: context)
                                         }
-                                    }) {
-                                        Text("削除")
-                                            .foregroundColor(.red)
                                     }
-                                }
-                                .sheet(isPresented: $editGroup) {
-                                    EditGroupView(group: group, selectedImageData: group.groupimage, titleText: group.grouptitle ?? "", groupColor: getGroupColor(color: group.color ?? "")) 
+                                } message: {
+                                    Text("データが削除されますが、よろしいですか？")
                                 }
                         }
                     }

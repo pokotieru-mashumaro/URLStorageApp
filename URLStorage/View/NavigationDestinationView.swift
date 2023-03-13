@@ -16,6 +16,7 @@ struct NavigationDestinationView: View {
     
     @State var deleteKey: Bool = false
     @State var deleteItems: [GroupItem] = []
+    @State var deleteAlert: Bool = false
     
     @State var editKey: Bool = false
     
@@ -52,9 +53,8 @@ struct NavigationDestinationView: View {
                     Spacer()
                     
                     Button {
-                        helper.itemDelete(context: context, items: deleteItems)
-                        groupItems = helper.getItem(groups: groups)
-                        deleteKey.toggle()
+                        deleteAlert = true
+                        deleteKey = false
                     } label: {
                         Text("削除")
                             .font(.title3)
@@ -86,6 +86,15 @@ struct NavigationDestinationView: View {
                 .hAlign(.trailing)
                 .vAlign(.bottom)
             }
+        }
+        .alert("警告", isPresented: $deleteAlert){
+            Button("削除", role: .destructive){
+                // データ削除処理
+                helper.itemDelete(context: context, items: deleteItems)
+                groupItems = helper.getItem(groups: groups)
+            }
+        } message: {
+            Text("\(deleteItems.count)つのデータが削除されますが、よろしいですか？")
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {

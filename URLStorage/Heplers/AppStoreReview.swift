@@ -14,7 +14,7 @@ class AppStoreReview {
     @AppStorage("launchedCount") static var launchedCount = 0
 
     /// しきい値
-    static let threshold = 20
+    static let threshold = 50
     
     /// 条件を満たしていれば、レビューリクエストを行う
     static func requestIfNeeded() {

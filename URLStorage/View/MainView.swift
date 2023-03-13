@@ -75,6 +75,7 @@ struct MainView: View {
             .navigationDestination(for: Groups.self, destination: { items in
                 NavigationDestinationView(groups: items) {
                     popToRoot()
+                    AppStoreReview.requestIfNeeded()
                 }
             })
             .toolbar {
@@ -89,15 +90,22 @@ struct MainView: View {
                                 columns =  Array(repeating: GridItem(.flexible()), count: 2)
                             }
                         }
-                                             
+                        
                         Button("設定") {
                             
+                        }
+                        
+                        //公開後
+                        Button("レビュー") {
+                            if let url = URL(string: "https://itunes.apple.com/app/idYOUR_APPLE_ID?action=write-review") {
+                                UIApplication.shared.open(url)
+                            }
                         }
                     } label: {
                         Image(systemName: "ellipsis")
                             .rotationEffect(.init(degrees: 90))
                             .scaleEffect(0.8)
-                    }
+                    }                    
                 }
             }
             .overlay {

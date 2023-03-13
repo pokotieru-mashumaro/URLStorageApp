@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B93E374429BF33AC00005B50 /* AppStoreReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93E374329BF33AC00005B50 /* AppStoreReview.swift */; };
 		B96B80AE29BE07EF00C6FF73 /* FullScreenImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96B80AD29BE07EF00C6FF73 /* FullScreenImageView.swift */; };
 		B999219629BDE78900FAAE24 /* EditGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B999219529BDE78900FAAE24 /* EditGroupView.swift */; };
 		B999219829BDEC2300FAAE24 /* EditItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B999219729BDEC2300FAAE24 /* EditItemView.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B93E374329BF33AC00005B50 /* AppStoreReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreReview.swift; sourceTree = "<group>"; };
 		B96B80AD29BE07EF00C6FF73 /* FullScreenImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenImageView.swift; sourceTree = "<group>"; };
 		B999219529BDE78900FAAE24 /* EditGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGroupView.swift; sourceTree = "<group>"; };
 		B999219729BDEC2300FAAE24 /* EditItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemView.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				B9B8AAEE29BB4842007C36CA /* CoreDataHelper.swift */,
+				B93E374329BF33AC00005B50 /* AppStoreReview.swift */,
 			);
 			path = Heplers;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 				B9B8AAF829BB4A72007C36CA /* Groups+CoreDataClass.swift in Sources */,
 				B9B8AABF29BB45DE007C36CA /* URLStorageApp.swift in Sources */,
 				B9B8AACB29BB45E0007C36CA /* URLStorage.xcdatamodeld in Sources */,
+				B93E374429BF33AC00005B50 /* AppStoreReview.swift in Sources */,
 				B9B8AAF629BB4A72007C36CA /* GroupItem+CoreDataClass.swift in Sources */,
 				B9B8AAD729BB46C1007C36CA /* DataExtension.swift in Sources */,
 				B9B8AAF129BB48AC007C36CA /* GroupColor.swift in Sources */,

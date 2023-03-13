@@ -66,22 +66,19 @@ struct addTaskGroupView: View {
                 
                 LazyVGrid(columns: Array(repeating: .init(.flexible(), spacing: 20), count: 3), spacing: 15) {
                     ForEach(GroupColor.allCases, id: \.rawValue) { color in
-                        Text(color.rawValue.uppercased())
-                            .font(.system(size: 12))
+                        Text("")
                             .hAlign(.center)
                             .padding(.vertical, 5)
                             .background {
                                 RoundedRectangle(cornerRadius: 5, style: .continuous)
                                     .fill(color.color.opacity(0.25))
                             }
-                            .foregroundColor(color.color)
                             .contentShape(Rectangle())
                             .onTapGesture {
                                 DispatchQueue.main.async {
                                     groupColor = color
                                 }
                             }
-                        
                     }
                 }
                 .padding(.top, 5)

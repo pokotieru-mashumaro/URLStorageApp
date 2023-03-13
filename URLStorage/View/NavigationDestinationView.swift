@@ -32,6 +32,12 @@ struct NavigationDestinationView: View {
                 ForEach(groupItems, id: \.self) { item in
                     itemView(item: item)
                 }
+                
+                if groupItems.isEmpty {
+                    //これがないとプラスボタンの座標がおかしくなる
+                    Rectangle()
+                        .fill(Color.clear)
+                }
             }
         }
         .onAppear {
@@ -62,6 +68,23 @@ struct NavigationDestinationView: View {
                     }
                     .padding(.bottom)
                 }
+            } else {
+                Button {
+                    addNewTask.toggle()
+                } label: {
+                    Image(systemName: "plus")
+                        .foregroundColor(.blue)
+                        .font(.system(size: 70))
+                        .background {
+                            Circle()
+                                .foregroundColor(.white)
+                                .frame(width: 100, height: 100)
+                                .shadow(radius: 5)
+                        }
+                }
+                .padding([.bottom, .trailing], 25)
+                .hAlign(.trailing)
+                .vAlign(.bottom)
             }
         }
         .toolbar {
@@ -81,20 +104,6 @@ struct NavigationDestinationView: View {
                         deleteKey.toggle()
                     }
                     .foregroundColor(.red)
-            }
-            
-            ToolbarItem(placement: .bottomBar) {
-                if !deleteKey {
-                    Button {
-                        addNewTask.toggle()
-                    } label: {
-                        Image(systemName: "plus")
-                            .foregroundColor(.blue)
-                            .font(.title)
-                    }
-                    .offset(y: -10)
-                    .hAlign(.trailing)
-                }
             }
         }
         .fullScreenCover(isPresented: $addNewTask) {

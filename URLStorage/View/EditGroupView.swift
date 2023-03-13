@@ -68,21 +68,18 @@ struct EditGroupView: View {
                 LazyVGrid(columns: Array(repeating: .init(.flexible(), spacing: 20), count: 3), spacing: 15) {
                     ForEach(GroupColor.allCases, id: \.rawValue) { color in
                         Text("")
-                            .font(.system(size: 12))
                             .hAlign(.center)
                             .padding(.vertical, 5)
                             .background {
                                 RoundedRectangle(cornerRadius: 5, style: .continuous)
                                     .fill(color.color.opacity(0.25))
                             }
-                            .foregroundColor(color.color)
                             .contentShape(Rectangle())
                             .onTapGesture {
                                 DispatchQueue.main.async {
                                     groupColor = color
                                 }
                             }
-                        
                     }
                 }
                 .padding(.top, 5)
@@ -163,17 +160,3 @@ struct EditGroupView_Previews: PreviewProvider {
         MainView()
     }
 }
-
-//func groupEdit(context: NSManagedObjectContext, group: Groups, title: String, color: String, image: Data?) {
-//    group.grouptimestamp = Date()
-//    group.grouptitle = title
-//    group.color = color
-//    group.groupimage = image
-//
-//    do {
-//        try context.save()
-//    }
-//    catch {
-//        print(error.localizedDescription)
-//    }
-//}

@@ -84,8 +84,23 @@ struct addTaskView: View {
                         .toggleStyle(SwitchToggleStyle(tint: .blue))
                     
                     if urlFlag {
-                        TextField("URL", text: $urlText)
-                            .keyboardType(.URL)
+                        HStack {
+                            TextField("URL", text: $urlText)
+                                .keyboardType(.URL)
+                            
+                            Button(action: {
+                                if let pasteboardString = UIPasteboard.general.string {
+                                    self.urlText = pasteboardString
+                                }
+                            }) {
+                                Text("ペースト")
+                                    .foregroundColor(Color.white)
+                                    .font(.caption2)
+                                    .padding(10)
+                                    .background(getColor(color: groups.color ?? ""))
+                                    .cornerRadius(10)
+                            }
+                        }
                         Rectangle()
                             .fill(.black.opacity(0.2))
                             .frame(height: 1)
@@ -128,6 +143,13 @@ struct addTaskView: View {
                 .disabled(titleText == "")
                 .opacity(titleText == "" ? 0.6 : 1)
                 
+            }
+            .onAppear {
+                NotificationCenter.default.addObserver(forName: UIPasteboard.changedNotification, object: UIPasteboard.general, queue: .main) { notification in
+                    if let pasteboardString = UIPasteboard.general.string, pasteboardString.contains("http") {
+                        self.urlText = pasteboardString
+                    }
+                }
             }
             .padding(.horizontal, 15)
             .photosPicker(isPresented: $showImagePicker, selection: $photoItem)

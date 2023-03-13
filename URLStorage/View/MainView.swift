@@ -90,7 +90,7 @@ struct MainView: View {
                             }
                         }
                                              
-                        Button("削除", role: .destructive) {
+                        Button("設定") {
                             
                         }
                     } label: {
@@ -99,20 +99,24 @@ struct MainView: View {
                             .scaleEffect(0.8)
                     }
                 }
-                
-                ToolbarItem(placement: .bottomBar) {
-                    HStack {
-                        Button {
-                            addNewGroup.toggle()
-                        } label: {
-                            Image(systemName: "plus")
-                                .foregroundColor(.blue)
-                                .font(.title)
+            }
+            .overlay {
+                Button {
+                    addNewGroup.toggle()
+                } label: {
+                    Image(systemName: "plus")
+                        .foregroundColor(.blue)
+                        .font(.system(size: 70))
+                        .background {
+                            Circle()
+                                .foregroundColor(.white)
+                                .frame(width: 100, height: 100)
+                                .shadow(radius: 5)
                         }
-                        .offset(y: -10)
-                        .hAlign(.trailing)
-                    }
                 }
+                .padding([.bottom, .trailing], 25)
+                .hAlign(.trailing)
+                .vAlign(.bottom)
             }
         }
         .searchable(text: $searchText, placement: .navigationBarDrawer, prompt: "検索") {
@@ -152,33 +156,21 @@ struct MainView: View {
     @ViewBuilder
     func gridView(groups: Groups) -> some View {
         if (groups.groupimage == nil) {
-            ZStack {
                 RoundedRectangle(cornerRadius: 16)
                     .foregroundColor(getColor(color: groups.color ?? "").opacity(0.25))
                     .overlay {
-                        ZStack {
-                            Rectangle()
-                                .foregroundColor(.white)
-                            
+                    
                             Text(groups.grouptitle ?? "")
-                                .font(.caption)
-                                .foregroundColor(getColor(color: groups.color ?? ""))
-                        }
-                        .frame(height: 30)
-                        .vAlign(.bottom)
-                        
+                                .font(.title)
+                                .foregroundColor(.white)
                     }
-                    .cornerRadius(20)
                     .shadow(radius: 1)
-            }
+            
         }
         
         if (groups.groupimage != nil) {
-            ZStack {
                 Image(uiImage: UIImage(data: groups.groupimage!)!)
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .clipShape(Rectangle())
                     .overlay {
                         ZStack {
                             Rectangle()
@@ -191,9 +183,8 @@ struct MainView: View {
                         .frame(height: 30)
                         .vAlign(.bottom)
                     }
-                    .cornerRadius(20)
+                    .cornerRadius(16)
                     .shadow(radius: 1)
-            }
         }
     }
     

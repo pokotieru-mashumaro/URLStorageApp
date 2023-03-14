@@ -10,6 +10,7 @@ import PhotosUI
 
 struct EditItemView: View {
     let groupItem: GroupItem
+    var onEdit: () -> ()
     let helper = CoreDataHelper()
     @Environment(\.managedObjectContext) var context
     @Environment(\.dismiss) private var dismiss
@@ -106,6 +107,7 @@ struct EditItemView: View {
                 
                 Button {
                     helper.itemEdit(context: context, item: groupItem, title: titleText, image: selectedImageData, url: urlText, impression: articleText)
+                    onEdit()
                     dismiss()
                 } label: {
                     Text("編集")

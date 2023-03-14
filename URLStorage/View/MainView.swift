@@ -13,19 +13,11 @@ struct MainView: View {
     }
     @Environment(\.managedObjectContext) var context
     @State var path: [Groups] = []
-    @State var searchText: String = ""
     
-    //    @Environment(\.managedObjectContext) private var viewContext
-    //    @FetchRequest(
-    //        sortDescriptors: [NSSortDescriptor(keyPath: \Groups.timestamp, ascending: false)],
-    //        animation: .default
-    //      )
-    //      var groups: FetchedResults<Groups>
     @State var groups: [Groups] = []
     let helper = CoreDataHelper()
     
     @State var isAdd: Bool = false
-    @State var isEdit: Bool = false
     @State var editGroup: Groups?
     @State var deleteAlert: Bool = false
     //Grid関係
@@ -48,8 +40,6 @@ struct MainView: View {
                                 .contextMenu {
                                     Button(action: {
                                         editGroup = group
-                                        guard editGroup == nil else { return isEdit.toggle() }
-                                        
                                     }) {
                                         Label("編集", systemImage: "pencil")
                                     }
@@ -58,11 +48,6 @@ struct MainView: View {
                                         deleteAlert.toggle()
                                     }) {
                                         Label("削除", systemImage: "trash")
-                                    }
-                                }
-                                .sheet(isPresented: $isEdit) {
-                                    if let editGroup = editGroup {
-                                        EditGroupView(group: editGroup)
                                     }
                                 }
                                 .alert("警告", isPresented: $deleteAlert){
@@ -143,6 +128,11 @@ struct MainView: View {
                 .ignoresSafeArea(.keyboard, edges: .bottom)
             }
         }
+        .sheet(item: $editGroup) { group in
+            EditGroupView(group: group) {
+                groups = helper.getFolder(context: context)
+            }
+        }
         .fullScreenCover(isPresented: $isAdd) {
             addTaskGroupView {
                 groups = helper.getFolder(context: context)
@@ -161,7 +151,6 @@ struct MainView: View {
             RoundedRectangle(cornerRadius: 16)
                 .foregroundColor(getColor(color: groups.color ?? "").opacity(0.25))
                 .overlay {
-                    
                     Text(groups.grouptitle ?? "")
                         .font(.title)
                         .foregroundColor(.white)

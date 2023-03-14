@@ -18,7 +18,6 @@ struct NavigationDestinationView: View {
     @State var deleteItems: [GroupItem] = []
     @State var deleteAlert: Bool = false
     
-    @State var isEdit: Bool = false
     @State var editItem: GroupItem?
     
     @State private var isZoomed = false
@@ -163,7 +162,6 @@ struct NavigationDestinationView: View {
                     
                     Button("編集") {
                         editItem = item
-                        isEdit.toggle()
                     }
                     .foregroundColor(getColor(color: groups.color ?? "").opacity(0.7))
                     .vAlign(.topTrailing)
@@ -209,9 +207,9 @@ struct NavigationDestinationView: View {
             .padding([.horizontal, .top], 20)
         }
         .contentShape(Rectangle())
-        .sheet(isPresented: $isEdit) {
-            if let editItem = editItem {
-                EditItemView(groupItem: editItem)
+        .sheet(item: $editItem) { item in
+            EditItemView(groupItem: item) {
+                groupItems = helper.getItem(groups: groups)
             }
         }
         .fullScreenCover(isPresented: $isZoomed) {

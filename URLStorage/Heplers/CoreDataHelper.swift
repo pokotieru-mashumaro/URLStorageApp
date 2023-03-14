@@ -128,6 +128,7 @@ final class CoreDataHelper {
         item.url = url
         item.impression = impression
         
+        item.group?.grouptimestamp = Date()
         do {
             try context.save()
         }

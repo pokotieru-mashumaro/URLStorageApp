@@ -15,6 +15,7 @@ struct EditGroupView: View {
     let helper = CoreDataHelper()
     
     let group: Groups
+    var onEdit: () -> ()
     //photo関係
     @State var selectedImageData: Data?
     @State var showImagePicker: Bool = false
@@ -78,6 +79,7 @@ struct EditGroupView: View {
             
             Button {
                 helper.groupEdit(context: context, group: group, title: titleText, color: groupColor.name, image: selectedImageData)
+                onEdit()
                 dismiss()
             } label: {
                 Text("編集")

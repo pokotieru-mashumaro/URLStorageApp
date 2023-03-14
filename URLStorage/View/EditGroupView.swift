@@ -25,15 +25,6 @@ struct EditGroupView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 30) {
-            Button {
-                dismiss()
-            } label: {
-                Image(systemName: "chevron.left")
-                    .foregroundColor(.black)
-                    .contentShape(Rectangle())
-            }
-            .padding(.top)
-            
             Text("グループ作成")
                 .font(.system(size: 28))
                 .fontWeight(.heavy)
@@ -106,7 +97,12 @@ struct EditGroupView: View {
             .opacity(titleText == "" ? 0.6 : 1)
             
         }
-        .padding(.horizontal, 15)
+        .onAppear {
+            titleText = group.grouptitle ?? ""
+            selectedImageData = group.groupimage
+            groupColor = getGroupColor(color: group.color ?? "")
+        }
+        .padding(15)
         .photosPicker(isPresented: $showImagePicker, selection: $photoItem)
         .onChange(of: photoItem) { newvalue in
             if let newvalue {

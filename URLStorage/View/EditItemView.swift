@@ -27,15 +27,6 @@ struct EditItemView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: 30) {
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "chevron.left")
-                        .foregroundColor(.black)
-                        .contentShape(Rectangle())
-                }
-                .padding(.top)
-                
                 HStack {
                     Text("内容作成")
                         .font(.system(size: 28))
@@ -136,13 +127,19 @@ struct EditItemView: View {
                 
             }
             .onAppear {
+                titleText = groupItem.itemtitle ?? ""
+                selectedImageData = groupItem.itemimage
+                urlText = groupItem.url ?? ""
+                articleText = groupItem.impression ?? ""
+                
+                //ペーストボタン
                 NotificationCenter.default.addObserver(forName: UIPasteboard.changedNotification, object: UIPasteboard.general, queue: .main) { notification in
                     if let pasteboardString = UIPasteboard.general.string, pasteboardString.contains("http") {
                         self.urlText = pasteboardString
                     }
                 }
             }
-            .padding(.horizontal, 15)
+            .padding(15)
             .photosPicker(isPresented: $showImagePicker, selection: $photoItem)
             .onChange(of: photoItem) { newvalue in
                 if let newvalue {

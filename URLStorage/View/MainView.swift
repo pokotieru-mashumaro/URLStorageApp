@@ -9,23 +9,24 @@ import SwiftUI
 
 struct MainView: View {
     init() {
-    UITextView.appearance().backgroundColor = .clear
+        UITextView.appearance().backgroundColor = .clear
     }
     @Environment(\.managedObjectContext) var context
     @State var path: [Groups] = []
     @State var searchText: String = ""
     
-//    @Environment(\.managedObjectContext) private var viewContext
-//    @FetchRequest(
-//        sortDescriptors: [NSSortDescriptor(keyPath: \Groups.timestamp, ascending: false)],
-//        animation: .default
-//      )
-//      var groups: FetchedResults<Groups>
+    //    @Environment(\.managedObjectContext) private var viewContext
+    //    @FetchRequest(
+    //        sortDescriptors: [NSSortDescriptor(keyPath: \Groups.timestamp, ascending: false)],
+    //        animation: .default
+    //      )
+    //      var groups: FetchedResults<Groups>
     @State var groups: [Groups] = []
     let helper = CoreDataHelper()
     
-    @State var addNewGroup: Bool = false
-    @State var editGroup: Bool = false
+    @State var isAdd: Bool = false
+    @State var isEdit: Bool = false
+    @State var editGroup: Groups?
     @State var deleteAlert: Bool = false
     //Grid関係
     @State var columns = Array(repeating: GridItem(.flexible()), count: 2)
@@ -46,7 +47,9 @@ struct MainView: View {
                                 .frame(width: gridWidth, height: gridWidth)
                                 .contextMenu {
                                     Button(action: {
-                                        editGroup.toggle()
+                                        editGroup = group
+                                        guard editGroup == nil else { return isEdit.toggle() }
+                                        
                                     }) {
                                         Label("編集", systemImage: "pencil")
                                     }
@@ -56,10 +59,11 @@ struct MainView: View {
                                     }) {
                                         Label("削除", systemImage: "trash")
                                     }
-                                    .foregroundColor(.red)
                                 }
-                                .sheet(isPresented: $editGroup) {
-                                    EditGroupView(group: group, selectedImageData: group.groupimage, titleText: group.grouptitle ?? "", groupColor: getGroupColor(color: group.color ?? "")) 
+                                .sheet(isPresented: $isEdit) {
+                                    if let editGroup = editGroup {
+                                        EditGroupView(group: editGroup)
+                                    }
                                 }
                                 .alert("警告", isPresented: $deleteAlert){
                                     Button("削除", role: .destructive){
@@ -102,6 +106,10 @@ struct MainView: View {
                             
                         }
                         
+                        Button("プレミアム") {
+                            
+                        }
+                        
                         //公開後
                         Button("レビュー") {
                             if let url = URL(string: "https://itunes.apple.com/app/idYOUR_APPLE_ID?action=write-review") {
@@ -112,12 +120,12 @@ struct MainView: View {
                         Image(systemName: "ellipsis")
                             .rotationEffect(.init(degrees: 90))
                             .scaleEffect(0.8)
-                    }                    
+                    }
                 }
             }
             .overlay {
                 Button {
-                    addNewGroup.toggle()
+                    isAdd.toggle()
                 } label: {
                     Image(systemName: "plus")
                         .foregroundColor(.blue)
@@ -132,31 +140,10 @@ struct MainView: View {
                 .padding([.bottom, .trailing], 25)
                 .hAlign(.trailing)
                 .vAlign(.bottom)
+                .ignoresSafeArea(.keyboard, edges: .bottom)
             }
         }
-        .searchable(text: $searchText, placement: .navigationBarDrawer, prompt: "検索") {
-            let matchedItems = self.groups.filter { group in
-                return group.grouptitle?.contains(self.searchText) ?? false
-            }
-            
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 2)) {
-                ForEach(matchedItems) { group in
-                    NavigationLink(value: group) {
-                        gridView(groups: group)
-                            .foregroundColor(.black)
-                            .padding()
-                            .frame(width: UIScreen.main.bounds.width / 2,
-                                   height: UIScreen.main.bounds.width / 2)
-                    }
-                }
-            }
-            .navigationDestination(for: Groups.self, destination: { item in
-                NavigationDestinationView(groups: item) {
-                    popToRoot()
-                }
-            })
-        }
-        .fullScreenCover(isPresented: $addNewGroup) {
+        .fullScreenCover(isPresented: $isAdd) {
             addTaskGroupView {
                 groups = helper.getFolder(context: context)
             }
@@ -165,60 +152,40 @@ struct MainView: View {
     }
     
     private func popToRoot() {
-           path = []
+        path = []
     }
     
     @ViewBuilder
     func gridView(groups: Groups) -> some View {
         if (groups.groupimage == nil) {
-                RoundedRectangle(cornerRadius: 16)
-                    .foregroundColor(getColor(color: groups.color ?? "").opacity(0.25))
-                    .overlay {
+            RoundedRectangle(cornerRadius: 16)
+                .foregroundColor(getColor(color: groups.color ?? "").opacity(0.25))
+                .overlay {
                     
-                            Text(groups.grouptitle ?? "")
-                                .font(.title)
-                                .foregroundColor(.white)
-                    }
-                    .shadow(radius: 1)
-            
+                    Text(groups.grouptitle ?? "")
+                        .font(.title)
+                        .foregroundColor(.white)
+                }
+                .shadow(radius: 1)
         }
         
         if (groups.groupimage != nil) {
-                Image(uiImage: UIImage(data: groups.groupimage!)!)
-                    .resizable()
-                    .overlay {
-                        ZStack {
-                            Rectangle()
-                                .foregroundColor(.white)
-                            
-                            Text(groups.grouptitle ?? "")
-                                .font(.caption)
-                                .foregroundColor(getColor(color: groups.color ?? ""))
-                        }
-                        .frame(height: 30)
-                        .vAlign(.bottom)
+            Image(uiImage: UIImage(data: groups.groupimage!)!)
+                .resizable()
+                .overlay {
+                    ZStack {
+                        Rectangle()
+                            .foregroundColor(.white)
+                        
+                        Text(groups.grouptitle ?? "")
+                            .font(.caption)
+                            .foregroundColor(getColor(color: groups.color ?? ""))
                     }
-                    .cornerRadius(16)
-                    .shadow(radius: 1)
-        }
-    }
-    
-    private func getGroupColor(color: String) -> GroupColor {
-        switch color {
-        case "gray":
-            return GroupColor.gray
-        case "green":
-            return GroupColor.green
-        case "pink":
-            return GroupColor.pink
-        case "blue":
-            return GroupColor.blue
-        case "purple":
-            return GroupColor.purple
-        case "brown":
-            return GroupColor.brown
-        default:
-            return GroupColor.gray
+                    .frame(height: 30)
+                    .vAlign(.bottom)
+                }
+                .cornerRadius(16)
+                .shadow(radius: 1)
         }
     }
 }

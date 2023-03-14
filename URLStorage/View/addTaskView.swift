@@ -145,6 +145,7 @@ struct addTaskView: View {
                 
             }
             .onAppear {
+                //ペーストボタン
                 NotificationCenter.default.addObserver(forName: UIPasteboard.changedNotification, object: UIPasteboard.general, queue: .main) { notification in
                     if let pasteboardString = UIPasteboard.general.string, pasteboardString.contains("http") {
                         self.urlText = pasteboardString

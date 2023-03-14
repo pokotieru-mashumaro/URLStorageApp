@@ -50,6 +50,25 @@ enum GroupColor: String, CaseIterable {
     }
 }
 
+func getGroupColor(color: String) -> GroupColor {
+    switch color {
+    case "gray":
+        return GroupColor.gray
+    case "green":
+        return GroupColor.green
+    case "pink":
+        return GroupColor.pink
+    case "blue":
+        return GroupColor.blue
+    case "purple":
+        return GroupColor.purple
+    case "brown":
+        return GroupColor.brown
+    default:
+        return GroupColor.gray
+    }
+}
+
 func getColor(color: String) -> Color {
     switch color {
     case "gray":

@@ -12,13 +12,14 @@ struct NavigationDestinationView: View {
     let groups: Groups
     let helper = CoreDataHelper()
     
-    @State var addNewTask: Bool = false
+    @State var isAdd: Bool = false
     
-    @State var deleteKey: Bool = false
+    @State var isDelete: Bool = false
     @State var deleteItems: [GroupItem] = []
     @State var deleteAlert: Bool = false
     
-    @State var editKey: Bool = false
+    @State var isEdit: Bool = false
+    @State var editItem: GroupItem?
     
     @State private var isZoomed = false
     @State var zoomImage: GroupItem?
@@ -48,13 +49,13 @@ struct NavigationDestinationView: View {
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         .overlay {
-            if deleteKey {
+            if isDelete {
                 VStack {
                     Spacer()
                     
                     Button {
                         deleteAlert = true
-                        deleteKey = false
+                        isDelete = false
                     } label: {
                         Text("削除")
                             .font(.title3)
@@ -70,7 +71,7 @@ struct NavigationDestinationView: View {
                 }
             } else {
                 Button {
-                    addNewTask.toggle()
+                    isAdd.toggle()
                 } label: {
                     Image(systemName: "plus")
                         .foregroundColor(.blue)
@@ -110,12 +111,12 @@ struct NavigationDestinationView: View {
             
             ToolbarItem(placement: .navigationBarTrailing) {
                     Button("削除") {
-                        deleteKey.toggle()
+                        isDelete.toggle()
                     }
                     .foregroundColor(.red)
             }
         }
-        .fullScreenCover(isPresented: $addNewTask) {
+        .fullScreenCover(isPresented: $isAdd) {
             addTaskView(groups: groups) {
                 groupItems = helper.getItem(groups: groups)
             }
@@ -125,7 +126,7 @@ struct NavigationDestinationView: View {
     @ViewBuilder
     func itemView(item: GroupItem) -> some View {
         HStack {
-            if deleteKey {
+            if isDelete {
                 Image(systemName: deleteItems.contains(item) ? "checkmark.circle.fill" : "checkmark.circle")
                     .resizable()
                     .foregroundColor(getColor(color: groups.color ?? ""))
@@ -161,16 +162,19 @@ struct NavigationDestinationView: View {
                     Spacer()
                     
                     Button("編集") {
-                        editKey.toggle()
+                        editItem = item
+                        isEdit.toggle()
                     }
                     .foregroundColor(getColor(color: groups.color ?? "").opacity(0.7))
                     .vAlign(.topTrailing)
                 }
                 
-                HStack(spacing: 50) {
+                HStack {
                     Text(dateToString(date: item.itemtimestamp))
                         .foregroundColor(getColor(color: groups.color ?? "").opacity(0.5))
                         .font(.caption2)
+                    
+                    Spacer()
                     
                     if !(item.url?.isEmpty ?? false) {
                         Link(destination: URL(string: item.url!)!) {
@@ -181,14 +185,13 @@ struct NavigationDestinationView: View {
                                     Capsule()
                                         .fill(getColor(color: groups.color ?? "").opacity(0.5).gradient)
                                 }
+                                .padding(.trailing, 20)
                         }
                         .onTapGesture {
                             item.itemtimestamp = Date()
                             try! context.save()
                         }
                     }
-                    
-                    Spacer()
                 }
                 .frame(height: 25)
                 
@@ -206,14 +209,16 @@ struct NavigationDestinationView: View {
             .padding([.horizontal, .top], 20)
         }
         .contentShape(Rectangle())
-        .sheet(isPresented: $editKey, content: {
-            EditItemView(groupItem: item, selectedImageData: item.itemimage, titleText: item.itemtitle ?? "", urlText: item.url ?? "", articleText: item.impression ?? "")
-        })
+        .sheet(isPresented: $isEdit) {
+            if let editItem = editItem {
+                EditItemView(groupItem: editItem)
+            }
+        }
         .fullScreenCover(isPresented: $isZoomed) {
             FullScreenImageView(item: $zoomImage)
         }
         .onTapGesture {
-            guard deleteKey else { return }
+            guard isDelete else { return }
             if deleteItems.contains(item) {
                 deleteItems.removeAll(where: {$0 == item})
             } else {

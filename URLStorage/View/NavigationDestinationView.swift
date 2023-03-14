@@ -11,6 +11,7 @@ struct NavigationDestinationView: View {
     @Environment(\.managedObjectContext) var context
     let groups: Groups
     let helper = CoreDataHelper()
+    @State var groupItems: [GroupItem] = []
     
     @State var isAdd: Bool = false
     
@@ -24,9 +25,7 @@ struct NavigationDestinationView: View {
     @State var zoomImage: GroupItem?
     
     var onBack: () -> ()
-    
-    @State var groupItems: [GroupItem] = []
-    
+        
     var body: some View {
         ScrollView {
             VStack {
@@ -114,6 +113,14 @@ struct NavigationDestinationView: View {
                     }
                     .foregroundColor(.red)
             }
+        }
+        .sheet(item: $editItem) { item in
+            EditItemView(groupItem: item) {
+                groupItems = helper.getItem(groups: groups)
+            }
+        }
+        .fullScreenCover(isPresented: $isZoomed) {
+            FullScreenImageView(item: $zoomImage)
         }
         .fullScreenCover(isPresented: $isAdd) {
             addTaskView(groups: groups) {
@@ -207,14 +214,6 @@ struct NavigationDestinationView: View {
             .padding([.horizontal, .top], 20)
         }
         .contentShape(Rectangle())
-        .sheet(item: $editItem) { item in
-            EditItemView(groupItem: item) {
-                groupItems = helper.getItem(groups: groups)
-            }
-        }
-        .fullScreenCover(isPresented: $isZoomed) {
-            FullScreenImageView(item: $zoomImage)
-        }
         .onTapGesture {
             guard isDelete else { return }
             if deleteItems.contains(item) {

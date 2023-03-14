@@ -39,8 +39,8 @@ final class CoreDataHelper {
     
     func getItem(groups: Groups) -> [GroupItem] {
         if let groupItems = groups.item?.allObjects as? [GroupItem] {
-            let sortedGroupItems = groupItems.sorted(by: { $0.itemtimestamp ?? Date() > $1.itemtimestamp ?? Date() })
-            return sortedGroupItems
+            print("item取得")
+            return groupItems.sorted(by: { $0.itemtimestamp ?? Date() > $1.itemtimestamp ?? Date() })
         } else {
             return [GroupItem]()
         }

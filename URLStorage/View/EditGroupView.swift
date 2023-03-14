@@ -97,7 +97,6 @@ struct EditGroupView: View {
             .vAlign(.bottom)
             .disabled(titleText == "")
             .opacity(titleText == "" ? 0.6 : 1)
-            
         }
         .onAppear {
             titleText = group.grouptitle ?? ""

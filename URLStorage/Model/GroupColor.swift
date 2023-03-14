@@ -91,7 +91,7 @@ func getColor(color: String) -> Color {
 func dateToString(date: Date?) -> String {
     guard let date = date else { return "" }
     let calendar = Calendar(identifier: .gregorian)
-    let dateComponents = calendar.dateComponents([.year, .month, .day], from: date)
-    let select_date: String = "\(dateComponents.year!)/\(dateComponents.month!)/\(dateComponents.day!)"
+    let dateComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: date)
+    let select_date: String = "\(dateComponents.year!)/\(String(format: "%02d", dateComponents.month!))/\(String(format: "%02d", dateComponents.day!))/\(String(format: "%02d", dateComponents.hour!)):\(String(format: "%02d", dateComponents.minute!))"
     return select_date
 }

@@ -24,6 +24,9 @@ struct NavigationDestinationView: View {
     @State private var isZoomed = false
     @State var zoomImage: GroupItem?
     
+    @State var searchText = ""
+    //@FocusState  var isFocused: Bool
+    
     var onBack: () -> ()
         
     var body: some View {
@@ -42,6 +45,14 @@ struct NavigationDestinationView: View {
         }
         .onAppear {
             groupItems = helper.getItem(groups: groups)
+        }
+        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "検索") {
+            let matchedItems = self.groupItems.filter { item in
+                return item.itemtitle?.contains(self.searchText) ?? false
+            }
+            ForEach(matchedItems) { item in
+                itemView(item: item, search: true)
+            }
         }
         .navigationTitle(groups.grouptitle ?? "")
         .navigationBarTitleDisplayMode(.inline)
@@ -84,6 +95,7 @@ struct NavigationDestinationView: View {
                 .padding([.bottom, .trailing], 25)
                 .hAlign(.trailing)
                 .vAlign(.bottom)
+                .ignoresSafeArea(.keyboard, edges: .bottom)
             }
         }
         .alert("警告", isPresented: $deleteAlert){
@@ -130,7 +142,7 @@ struct NavigationDestinationView: View {
     }
     
     @ViewBuilder
-    func itemView(item: GroupItem) -> some View {
+    func itemView(item: GroupItem, search: Bool = false) -> some View {
         HStack {
             if isDelete {
                 Image(systemName: deleteItems.contains(item) ? "checkmark.circle.fill" : "checkmark.circle")
@@ -206,10 +218,11 @@ struct NavigationDestinationView: View {
                         .foregroundColor(.gray)
                         .hAlign(.leading)
                 }
-                
-                Rectangle()
-                    .fill(.black.opacity(0.2))
-                    .frame(height: 1)
+                if !search {
+                    Rectangle()
+                        .fill(.black.opacity(0.2))
+                        .frame(height: 1)
+                }
             }
             .padding([.horizontal, .top], 20)
         }

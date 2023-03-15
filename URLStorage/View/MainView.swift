@@ -125,7 +125,6 @@ struct MainView: View {
                 .padding([.bottom, .trailing], 25)
                 .hAlign(.trailing)
                 .vAlign(.bottom)
-                .ignoresSafeArea(.keyboard, edges: .bottom)
             }
         }
         .sheet(item: $editGroup) { group in

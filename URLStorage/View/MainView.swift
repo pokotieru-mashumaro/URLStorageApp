@@ -12,6 +12,9 @@ struct MainView: View {
         UITextView.appearance().backgroundColor = .clear
     }
     @Environment(\.managedObjectContext) var context
+    @EnvironmentObject private var sceneDelegate: MySceneDelegate
+    @ObservedObject var interstitial = Interstitial()
+
     @State var path: [Groups] = []
     
     @State var groups: [Groups] = []
@@ -56,6 +59,7 @@ struct MainView: View {
                                         DispatchQueue.main.async {
                                             helper.groupDelete(context: context, group: group)
                                             groups = helper.getFolder(context: context)
+                                            interstitial.ShowInterstitial()
                                         }
                                     }
                                 } message: {
@@ -65,8 +69,10 @@ struct MainView: View {
                     }
                 }
             }
+            .padding(.bottom, 50)
             .onAppear {
                 groups = helper.getFolder(context: context)
+                interstitial.LoadInterstitial()
             }
             .navigationDestination(for: Groups.self, destination: { items in
                 NavigationDestinationView(groups: items) {
@@ -107,24 +113,26 @@ struct MainView: View {
                             .scaleEffect(0.8)
                     }
                 }
+                
+                ToolbarItem(placement: .bottomBar) {
+                        Button {
+                            isAdd.toggle()
+                        } label: {
+                            Image(systemName: "plus")
+                                .font(.system(size: 30))
+                        }
+                        .hAlign(.trailing)
+                        .vAlign(.center)
+                }
             }
             .overlay {
-                Button {
-                    isAdd.toggle()
-                } label: {
-                    Image(systemName: "plus")
-                        .foregroundColor(.blue)
-                        .font(.system(size: 70))
-                        .background {
-                            Circle()
-                                .foregroundColor(.white)
-                                .frame(width: 100, height: 100)
-                                .shadow(radius: 5)
-                        }
+                VStack {
+                    Spacer()
+                    if let vc = sceneDelegate.window?.rootViewController {
+                        BannerView(viewController: vc, windowScene: sceneDelegate.windowScene)
+                            .frame(width: 320, height: 50)
+                    }
                 }
-                .padding([.bottom, .trailing], 25)
-                .hAlign(.trailing)
-                .vAlign(.bottom)
             }
         }
         .sheet(item: $editGroup) { group in

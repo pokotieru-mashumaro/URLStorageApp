@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B946A24688E7B3CCBE775CB /* Pods_URLStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D2A15653F79ADAD53662CF /* Pods_URLStorage.framework */; };
+		B90C6EE529C2F3EC00A11205 /* AdMobBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90C6EE429C2F3EC00A11205 /* AdMobBannerView.swift */; };
+		B90C6EE829C3268C00A11205 /* AdMobInterstitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90C6EE729C3268C00A11205 /* AdMobInterstitialView.swift */; };
 		B93E374429BF33AC00005B50 /* AppStoreReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93E374329BF33AC00005B50 /* AppStoreReview.swift */; };
 		B96B80AE29BE07EF00C6FF73 /* FullScreenImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96B80AD29BE07EF00C6FF73 /* FullScreenImageView.swift */; };
 		B999219629BDE78900FAAE24 /* EditGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B999219529BDE78900FAAE24 /* EditGroupView.swift */; };
@@ -34,6 +37,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		52D2A15653F79ADAD53662CF /* Pods_URLStorage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_URLStorage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1917C795A4C65CFE71A7E81 /* Pods-URLStorage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-URLStorage.release.xcconfig"; path = "Target Support Files/Pods-URLStorage/Pods-URLStorage.release.xcconfig"; sourceTree = "<group>"; };
+		B4B3479DEFA8F2925C8358E3 /* Pods-URLStorage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-URLStorage.debug.xcconfig"; path = "Target Support Files/Pods-URLStorage/Pods-URLStorage.debug.xcconfig"; sourceTree = "<group>"; };
+		B90C6EE429C2F3EC00A11205 /* AdMobBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdMobBannerView.swift; sourceTree = "<group>"; };
+		B90C6EE729C3268C00A11205 /* AdMobInterstitialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdMobInterstitialView.swift; sourceTree = "<group>"; };
 		B93E374329BF33AC00005B50 /* AppStoreReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreReview.swift; sourceTree = "<group>"; };
 		B96B80AD29BE07EF00C6FF73 /* FullScreenImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenImageView.swift; sourceTree = "<group>"; };
 		B999219529BDE78900FAAE24 /* EditGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGroupView.swift; sourceTree = "<group>"; };
@@ -67,6 +75,7 @@
 			files = (
 				B9B8AAE529BB47B6007C36CA /* Kingfisher in Frameworks */,
 				B9B8AAE229BB47AC007C36CA /* SwiftSoup in Frameworks */,
+				5B946A24688E7B3CCBE775CB /* Pods_URLStorage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +87,8 @@
 			children = (
 				B9B8AABD29BB45DE007C36CA /* URLStorage */,
 				B9B8AABC29BB45DE007C36CA /* Products */,
+				CBB12AAE4A006A7C18BA1D44 /* Pods */,
+				E3E55E32637F3324A32FF772 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -124,6 +135,8 @@
 				B9B8AAE829BB47E6007C36CA /* addTaskView.swift */,
 				B999219529BDE78900FAAE24 /* EditGroupView.swift */,
 				B999219729BDEC2300FAAE24 /* EditItemView.swift */,
+				B90C6EE429C2F3EC00A11205 /* AdMobBannerView.swift */,
+				B90C6EE729C3268C00A11205 /* AdMobInterstitialView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -167,6 +180,23 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
+		CBB12AAE4A006A7C18BA1D44 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B4B3479DEFA8F2925C8358E3 /* Pods-URLStorage.debug.xcconfig */,
+				B1917C795A4C65CFE71A7E81 /* Pods-URLStorage.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		E3E55E32637F3324A32FF772 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				52D2A15653F79ADAD53662CF /* Pods_URLStorage.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -174,9 +204,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B9B8AACF29BB45E0007C36CA /* Build configuration list for PBXNativeTarget "URLStorage" */;
 			buildPhases = (
+				10B3B841C351A0FC3FB4ABF5 /* [CP] Check Pods Manifest.lock */,
 				B9B8AAB729BB45DE007C36CA /* Sources */,
 				B9B8AAB829BB45DE007C36CA /* Frameworks */,
 				B9B8AAB929BB45DE007C36CA /* Resources */,
+				9B5C54188309781A0A46C91B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -240,6 +272,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		10B3B841C351A0FC3FB4ABF5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-URLStorage-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9B5C54188309781A0A46C91B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-URLStorage/Pods-URLStorage-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-URLStorage/Pods-URLStorage-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-URLStorage/Pods-URLStorage-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B9B8AAB729BB45DE007C36CA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -247,11 +321,13 @@
 			files = (
 				B9B8AAD929BB46E5007C36CA /* ViewExtension.swift in Sources */,
 				B9B8AAE729BB47CE007C36CA /* addTaskGroupView.swift in Sources */,
+				B90C6EE529C2F3EC00A11205 /* AdMobBannerView.swift in Sources */,
 				B9B8AADD29BB473C007C36CA /* VideoThumbnailView.swift in Sources */,
 				B9B8AADB29BB4701007C36CA /* MainView.swift in Sources */,
 				B96B80AE29BE07EF00C6FF73 /* FullScreenImageView.swift in Sources */,
 				B9B8AAF729BB4A72007C36CA /* GroupItem+CoreDataProperties.swift in Sources */,
 				B9B8AAF929BB4A72007C36CA /* Groups+CoreDataProperties.swift in Sources */,
+				B90C6EE829C3268C00A11205 /* AdMobInterstitialView.swift in Sources */,
 				B9B8AAC829BB45E0007C36CA /* Persistence.swift in Sources */,
 				B9B8AAF829BB4A72007C36CA /* Groups+CoreDataClass.swift in Sources */,
 				B9B8AABF29BB45DE007C36CA /* URLStorageApp.swift in Sources */,
@@ -387,6 +463,7 @@
 		};
 		B9B8AAD029BB45E0007C36CA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B4B3479DEFA8F2925C8358E3 /* Pods-URLStorage.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -397,6 +474,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = URLStorage/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -416,6 +494,7 @@
 		};
 		B9B8AAD129BB45E0007C36CA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B1917C795A4C65CFE71A7E81 /* Pods-URLStorage.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -426,6 +505,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = URLStorage/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

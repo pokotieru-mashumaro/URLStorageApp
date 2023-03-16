@@ -9,6 +9,9 @@ import SwiftUI
 
 struct NavigationDestinationView: View {
     @Environment(\.managedObjectContext) var context
+    @EnvironmentObject private var sceneDelegate: MySceneDelegate
+    @ObservedObject var interstitial = Interstitial()
+    
     let groups: Groups
     let helper = CoreDataHelper()
     @State var groupItems: [GroupItem] = []
@@ -28,7 +31,7 @@ struct NavigationDestinationView: View {
     //@FocusState  var isFocused: Bool
     
     var onBack: () -> ()
-        
+    
     var body: some View {
         ScrollView {
             VStack {
@@ -43,8 +46,10 @@ struct NavigationDestinationView: View {
                 }
             }
         }
+        .padding(.bottom, 50)
         .onAppear {
             groupItems = helper.getItem(groups: groups)
+            interstitial.LoadInterstitial()
         }
         .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "検索") {
             let matchedItems = self.groupItems.filter { item in
@@ -79,23 +84,13 @@ struct NavigationDestinationView: View {
                     .padding(.bottom)
                 }
             } else {
-                Button {
-                    isAdd.toggle()
-                } label: {
-                    Image(systemName: "plus")
-                        .foregroundColor(.blue)
-                        .font(.system(size: 70))
-                        .background {
-                            Circle()
-                                .foregroundColor(.white)
-                                .frame(width: 100, height: 100)
-                                .shadow(radius: 5)
-                        }
+                VStack {
+                    Spacer()
+                    if let vc = sceneDelegate.window?.rootViewController {
+                        BannerView(viewController: vc, windowScene: sceneDelegate.windowScene)
+                            .frame(width: 320, height: 50)
+                    }
                 }
-                .padding([.bottom, .trailing], 25)
-                .hAlign(.trailing)
-                .vAlign(.bottom)
-                .ignoresSafeArea(.keyboard, edges: .bottom)
             }
         }
         .alert("警告", isPresented: $deleteAlert){
@@ -103,9 +98,10 @@ struct NavigationDestinationView: View {
                 // データ削除処理
                 helper.itemDelete(context: context, items: deleteItems)
                 groupItems = helper.getItem(groups: groups)
+                interstitial.ShowInterstitial()
             }
         } message: {
-            Text("\(deleteItems.count)つのデータが削除されますが、よろしいですか？")
+            Text("データが削除されますが、よろしいですか？")
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
@@ -120,10 +116,21 @@ struct NavigationDestinationView: View {
             }
             
             ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("削除") {
-                        isDelete.toggle()
-                    }
-                    .foregroundColor(.red)
+                Button("削除") {
+                    isDelete.toggle()
+                }
+                .foregroundColor(.red)
+            }
+            
+            ToolbarItem(placement: .bottomBar) {
+                Button {
+                    isAdd.toggle()
+                } label: {
+                    Image(systemName: "plus")
+                        .font(.system(size: 30))
+                }
+                .hAlign(.trailing)
+                .vAlign(.center)
             }
         }
         .sheet(item: $editItem) { item in

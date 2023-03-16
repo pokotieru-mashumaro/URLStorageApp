@@ -68,8 +68,9 @@ struct MainView: View {
                         }
                     }
                 }
+                Text("")
+                    .padding(.bottom, 40)
             }
-            .padding(.bottom, 50)
             .onAppear {
                 groups = helper.getFolder(context: context)
                 interstitial.LoadInterstitial()

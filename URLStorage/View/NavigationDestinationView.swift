@@ -39,14 +39,10 @@ struct NavigationDestinationView: View {
                     itemView(item: item)
                 }
                 
-                if groupItems.isEmpty {
-                    //これがないとプラスボタンの座標がおかしくなる
-                    Rectangle()
-                        .fill(Color.clear)
-                }
+                Text("")
+                    .padding(.bottom, 40)
             }
         }
-        .padding(.bottom, 50)
         .onAppear {
             groupItems = helper.getItem(groups: groups)
             interstitial.LoadInterstitial()
@@ -83,6 +79,7 @@ struct NavigationDestinationView: View {
                     }
                     .padding(.bottom)
                 }
+                .ignoresSafeArea(.keyboard, edges: .bottom)
             } else {
                 VStack {
                     Spacer()
@@ -91,6 +88,7 @@ struct NavigationDestinationView: View {
                             .frame(width: 320, height: 50)
                     }
                 }
+                .ignoresSafeArea(.keyboard, edges: .bottom)
             }
         }
         .alert("警告", isPresented: $deleteAlert){

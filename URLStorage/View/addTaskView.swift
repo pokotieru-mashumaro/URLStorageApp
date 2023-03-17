@@ -62,6 +62,20 @@ struct addTaskView: View {
                                 }
                         } else {
                             photoView()
+                                .overlay {
+                                    if selectedImageData != nil {
+                                        Button {
+                                            photoItem = nil
+                                            selectedImageData = nil
+                                        } label: {
+                                            Image(systemName: "xmark.circle.fill")
+                                                .foregroundColor(.gray)
+                                                .font(.system(size: 20))
+                                        }
+                                        .hAlign(.trailing)
+                                        .vAlign(.top)
+                                    }
+                                }
                         }
                         
                         VStack {

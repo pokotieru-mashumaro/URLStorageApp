@@ -45,6 +45,20 @@ struct addTaskGroupView: View {
                 HStack {
                     photoView()
                         .padding(.leading, 10)
+                        .overlay {
+                            if selectedImageData != nil {
+                                Button {
+                                    photoItem = nil
+                                    selectedImageData = nil
+                                } label: {
+                                    Image(systemName: "xmark.circle.fill")
+                                        .foregroundColor(.gray)
+                                        .font(.system(size: 20))
+                                }
+                                .hAlign(.trailing)
+                                .vAlign(.top)
+                            }
+                        }
                         .onTapGesture {
                             showImagePicker.toggle()
                         }

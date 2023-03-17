@@ -160,8 +160,12 @@ struct MainView: View {
         }
         
         if (groups.groupimage != nil) {
-            Image(uiImage: UIImage(data: groups.groupimage!)!)
-                .resizable()
+            Color.clear
+                .overlay{
+                    Image(uiImage: UIImage(data: groups.groupimage!)!)
+                        .resizable()
+                        .scaledToFill()
+                }
                 .overlay {
                     ZStack {
                         Rectangle()

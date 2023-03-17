@@ -10,6 +10,7 @@ import PhotosUI
 
 struct addTaskGroupView: View {
     @Environment(\.managedObjectContext) var context
+    @EnvironmentObject private var sceneDelegate: MySceneDelegate
     @Environment(\.dismiss) private var dismiss
     
     let helper = CoreDataHelper()
@@ -106,6 +107,9 @@ struct addTaskGroupView: View {
             .disabled(titleText == "")
             .opacity(titleText == "" ? 0.6 : 1)
             
+            Text("")
+                .padding(.bottom, 40)
+            
         }
         .padding(.horizontal, 15)
         .photosPicker(isPresented: $showImagePicker, selection: $photoItem)
@@ -124,7 +128,15 @@ struct addTaskGroupView: View {
                 }
             }
         }
-        
+        .overlay {
+            VStack {
+                Spacer()
+                if let vc = sceneDelegate.window?.rootViewController {
+                    BannerView(viewController: vc, windowScene: sceneDelegate.windowScene)
+                        .frame(width: 320, height: 50)
+                }
+            }
+        }
     }
     
     @ViewBuilder

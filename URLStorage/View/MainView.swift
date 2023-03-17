@@ -23,6 +23,7 @@ struct MainView: View {
     @State var isAdd: Bool = false
     @State var editGroup: Groups?
     @State var deleteAlert: Bool = false
+    @State var deleteGroup: Groups?
     //Grid関係
     @State var columns = Array(repeating: GridItem(.flexible()), count: 2)
     @State var columnsNumber: CGFloat = 2
@@ -48,6 +49,7 @@ struct MainView: View {
                                     }
                                     
                                     Button(action: {
+                                        deleteGroup = group
                                         deleteAlert.toggle()
                                     }) {
                                         Label("削除", systemImage: "trash")
@@ -57,7 +59,7 @@ struct MainView: View {
                                     Button("削除", role: .destructive){
                                         // データ削除処理
                                         DispatchQueue.main.async {
-                                            helper.groupDelete(context: context, group: group)
+                                            helper.groupDelete(context: context, group: deleteGroup!)
                                             groups = helper.getFolder(context: context)
                                             interstitial.ShowInterstitial()
                                         }

@@ -13,6 +13,7 @@ struct EditItemView: View {
     var onEdit: () -> ()
     let helper = CoreDataHelper()
     @Environment(\.managedObjectContext) var context
+    @EnvironmentObject private var sceneDelegate: MySceneDelegate
     @Environment(\.dismiss) private var dismiss
     
     //photo関係
@@ -59,7 +60,7 @@ struct EditItemView: View {
                                 .font(.system(size: 16))
                             
                             Rectangle()
-                                .fill(.black.opacity(0.2))
+                                .fill(.primary.opacity(0.2))
                                 .frame(height: 1)
                         }
                     }
@@ -89,7 +90,7 @@ struct EditItemView: View {
                     }
                     
                     Rectangle()
-                        .fill(.black.opacity(0.2))
+                        .fill(.primary.opacity(0.2))
                         .frame(height: 1)
                     
                     TitleView("コメント", .gray)
@@ -127,6 +128,9 @@ struct EditItemView: View {
                 .disabled(titleText == "")
                 .opacity(titleText == "" ? 0.6 : 1)
                 
+                Text("")
+                    .padding(.bottom, 40)
+                
             }
             .onAppear {
                 titleText = groupItem.itemtitle ?? ""
@@ -158,6 +162,16 @@ struct EditItemView: View {
                     }
                 }
             }
+        }
+        .overlay {
+            VStack {
+                Spacer()
+                if let vc = sceneDelegate.window?.rootViewController {
+                    BannerView(viewController: vc, windowScene: sceneDelegate.windowScene)
+                        .frame(width: 320, height: 50)
+                }
+            }
+            .ignoresSafeArea(.keyboard, edges: .bottom)
         }
     }
     

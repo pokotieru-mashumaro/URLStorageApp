@@ -120,7 +120,6 @@ struct EditGroupView: View {
                 }
             }
         }
-        
     }
     
     @ViewBuilder

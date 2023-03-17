@@ -187,7 +187,6 @@ struct EditItemView: View {
             
         }
     }
-    
 }
 
 struct EditItemView_Previews: PreviewProvider {

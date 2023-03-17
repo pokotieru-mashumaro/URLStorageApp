@@ -9,23 +9,6 @@ import Foundation
 import CoreData
 
 final class CoreDataHelper {
-//    let persistentContainer: NSPersistentContainer
-//
-//    init() {
-//        persistentContainer = NSPersistentContainer(name: "URLStorage")
-//
-////        let description = NSPersistentStoreDescription()
-////        description.shouldMigrateStoreAutomatically = true
-////        description.shouldInferMappingModelAutomatically = true
-////        persistentContainer.persistentStoreDescriptions = [description]
-////
-//        persistentContainer.loadPersistentStores { (description, error) in
-//            if let error = error {
-//                fatalError("Core Data Store failed \(error.localizedDescription)")
-//            }
-//        }
-//    }
-    
     func getFolder(context: NSManagedObjectContext) -> [Groups] {
         let fetchRequest: NSFetchRequest<Groups> = Groups.fetchRequest()
         

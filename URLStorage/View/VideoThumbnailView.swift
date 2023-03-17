@@ -129,7 +129,6 @@ struct FullScreenVideoThumbnailView: View {
         }
     }
     
-    //非同期にすれば完璧
     private func getThumbnailUrl() async -> String? {
         guard let url = URL(string: url) else {
             return nil

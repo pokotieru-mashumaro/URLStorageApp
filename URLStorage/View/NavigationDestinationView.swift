@@ -225,7 +225,7 @@ struct NavigationDestinationView: View {
                 }
                 if !search {
                     Rectangle()
-                        .fill(.black.opacity(0.2))
+                        .fill(.primary.opacity(0.2))
                         .frame(height: 1)
                 }
             }

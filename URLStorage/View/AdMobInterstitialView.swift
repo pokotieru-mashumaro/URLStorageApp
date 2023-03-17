@@ -10,11 +10,11 @@ import GoogleMobileAds
 class Interstitial: NSObject, GADFullScreenContentDelegate, ObservableObject {
     @Published var interstitialAdLoaded: Bool = false
     var InterstitialAd: GADInterstitialAd?
-
+    
     override init() {
         super.init()
     }
-
+    
     // リワード広告の読み込み
     func LoadInterstitial() {
         GADInterstitialAd.load(withAdUnitID: "ca-app-pub-3940256099942544/4411468910", request: GADRequest()) { (ad, error) in
@@ -29,7 +29,7 @@ class Interstitial: NSObject, GADFullScreenContentDelegate, ObservableObject {
             self.InterstitialAd?.fullScreenContentDelegate = self
         }
     }
-
+    
     // インタースティシャル広告の表示
     func ShowInterstitial() {
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
@@ -51,13 +51,13 @@ class Interstitial: NSObject, GADFullScreenContentDelegate, ObservableObject {
         self.interstitialAdLoaded = false
         self.LoadInterstitial()
     }
-
+    
     // 表示通知
     func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
         print("インタースティシャル広告を表示しました")
         self.interstitialAdLoaded = false
     }
-
+    
     // クローズ通知
     func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
         print("インタースティシャル広告を閉じました")

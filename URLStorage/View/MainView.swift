@@ -14,7 +14,7 @@ struct MainView: View {
     @Environment(\.managedObjectContext) var context
     @EnvironmentObject private var sceneDelegate: MySceneDelegate
     @ObservedObject var interstitial = Interstitial()
-
+    
     @State var path: [Groups] = []
     
     @State var groups: [Groups] = []
@@ -94,14 +94,6 @@ struct MainView: View {
                             }
                         }
                         
-                        Button("設定") {
-                            
-                        }
-                        
-                        Button("プレミアム") {
-                            
-                        }
-                        
                         //公開後
                         Button("レビュー") {
                             if let url = URL(string: "https://itunes.apple.com/app/idYOUR_APPLE_ID?action=write-review") {
@@ -116,14 +108,14 @@ struct MainView: View {
                 }
                 
                 ToolbarItem(placement: .bottomBar) {
-                        Button {
-                            isAdd.toggle()
-                        } label: {
-                            Image(systemName: "plus")
-                                .font(.system(size: 30))
-                        }
-                        .hAlign(.trailing)
-                        .vAlign(.center)
+                    Button {
+                        isAdd.toggle()
+                    } label: {
+                        Image(systemName: "plus")
+                            .font(.system(size: 30))
+                    }
+                    .hAlign(.trailing)
+                    .vAlign(.center)
                 }
             }
             .overlay {

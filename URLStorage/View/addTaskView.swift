@@ -27,7 +27,7 @@ struct addTaskView: View {
     @State var feelingFlag: Bool = false
     @State var urlText: String = ""
     @State var feelingText: String = ""
-        
+    
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: 30) {
@@ -35,7 +35,7 @@ struct addTaskView: View {
                     dismiss()
                 } label: {
                     Image(systemName: "chevron.left")
-                        .foregroundColor(.black)
+                        .foregroundColor(.primary)
                         .contentShape(Rectangle())
                 }
                 .padding(.top)
@@ -71,7 +71,7 @@ struct addTaskView: View {
                                 .font(.system(size: 16))
                             
                             Rectangle()
-                                .fill(.black.opacity(0.2))
+                                .fill(.primary.opacity(0.2))
                                 .frame(height: 1)
                         }
                     }
@@ -188,14 +188,13 @@ struct addTaskView: View {
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 85, height: 85)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
-                
+            
         } else {
             Image(systemName: "photo")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 85, height: 85)
                 .foregroundColor(getColor(color: groups.color ?? "").opacity(0.5))
-
         }
     }
 }

@@ -25,19 +25,19 @@ struct addTaskGroupView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 30) {
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "chevron.left")
-                        .foregroundColor(.black)
-                        .contentShape(Rectangle())
-                }
-                .padding(.top)
-                
-                Text("グループ作成")
-                    .font(.system(size: 28))
-                    .fontWeight(.heavy)
-                
+            Button {
+                dismiss()
+            } label: {
+                Image(systemName: "chevron.left")
+                    .foregroundColor(.primary)
+                    .contentShape(Rectangle())
+            }
+            .padding(.top)
+            
+            Text("グループ作成")
+                .font(.system(size: 28))
+                .fontWeight(.heavy)
+            
             VStack(alignment: .leading, spacing: 20) {
                 TitleView("写真(任意)", .gray)
                 
@@ -46,7 +46,7 @@ struct addTaskGroupView: View {
                         .padding(.leading, 10)
                         .onTapGesture {
                             showImagePicker.toggle()
-                    }
+                        }
                         .hAlign(.center)
                 }
             }
@@ -56,9 +56,9 @@ struct addTaskGroupView: View {
                 
                 TextField("タイトル（必須）", text: $titleText)
                     .font(.system(size: 16))
-
+                
                 Rectangle()
-                    .fill(.black.opacity(0.2))
+                    .fill(.primary.opacity(0.2))
                     .frame(height: 1)
                 
                 TitleView("カラー", .gray)
@@ -83,7 +83,7 @@ struct addTaskGroupView: View {
                 }
                 .padding(.top, 5)
             }
-
+            
             Button {
                 let color = groupColor.name
                 helper.groupSave(context: context, title: titleText, color: color, image: selectedImageData)
@@ -143,7 +143,7 @@ struct addTaskGroupView: View {
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 85, height: 85)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
-                
+            
         } else {
             Image(systemName: "photo")
                 .resizable()
@@ -151,7 +151,6 @@ struct addTaskGroupView: View {
                 .frame(width: 85, height: 85)
                 .foregroundColor(groupColor.color.opacity(0.5))
                 .foregroundColor(.blue)
-
         }
     }
 }

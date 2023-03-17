@@ -13,7 +13,7 @@ struct FullScreenImageView: View {
     
     @State private var scale = 1.0
     @State private var lastScale = 1.0
-
+    
     var magnification: some Gesture {
         MagnificationGesture()
             .onChanged { value in
@@ -29,7 +29,7 @@ struct FullScreenImageView: View {
                 lastScale = 1.0
             }
     }
-
+    
     var body: some View {
         ZStack {
             Color.black

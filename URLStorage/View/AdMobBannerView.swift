@@ -12,7 +12,7 @@ import GoogleMobileAds
 struct BannerView: UIViewRepresentable {
     let viewController: UIViewController
     let windowScene: UIWindowScene?
-                
+    
     func makeCoordinator() -> Coordinator {
         .init()
     }
@@ -30,7 +30,7 @@ struct BannerView: UIViewRepresentable {
     
     func updateUIView(_ bannerView: GADBannerView, context: Context) {
     }
-        
+    
     class Coordinator: NSObject, GADBannerViewDelegate {
         func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
         }

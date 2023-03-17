@@ -18,7 +18,12 @@ struct VideoThumbnailView: View {
             if let thumbnailUrl = thumbnailUrl {
                 KFImage.url(URL(string: thumbnailUrl))
                     .placeholder {
-                        Color.gray
+                        ZStack {
+                            Color.gray
+                            
+                            Text("画像の生成に\n失敗しました")
+                                .font(.caption2)
+                        }
                     }
                     .resizable()
                     .frame(width: 100, height: 80)
@@ -30,24 +35,7 @@ struct VideoThumbnailView: View {
             }
         }
         .task {
-            thumbnailUrl = await getThumbnailUrl()
-        }
-    }
-    
-    //非同期にすれば完璧
-    private func getThumbnailUrl() async -> String? {
-        guard let url = URL(string: url) else {
-            return nil
-        }
-        
-        do {
-            let html = try String(contentsOf: url, encoding: .utf8)
-            let doc = try SwiftSoup.parse(html)
-            let thumbnail = try doc.select("meta[property=og:image]").first()
-            return try thumbnail?.attr("content")
-        } catch {
-            print("Error getting thumbnail URL: \(error.localizedDescription)")
-            return nil
+            thumbnailUrl = await getThumbnailUrl(url: url)
         }
     }
 }
@@ -61,8 +49,12 @@ struct AddOrEditVideoThumbnailView: View {
             if let thumbnailUrl = thumbnailUrl {
                 KFImage.url(URL(string: thumbnailUrl))
                     .placeholder {
-                        Color.gray
-                    }
+                        ZStack {
+                            Color.gray
+                            
+                            Text("画像の生成に\n失敗しました")
+                                .font(.caption2)
+                        }                    }
                     .resizable()
                     .placeholder {
                         loadImage()
@@ -76,29 +68,13 @@ struct AddOrEditVideoThumbnailView: View {
             }
         }
         .task {
-            thumbnailUrl = await getThumbnailUrl()
+            thumbnailUrl = await getThumbnailUrl(url: url)
         }
         .onChange(of: url) { newValue in
             thumbnailUrl = nil
             Task {
-                thumbnailUrl = await getThumbnailUrl()
+                thumbnailUrl = await getThumbnailUrl(url: url)
             }
-        }
-    }
-    
-    private func getThumbnailUrl() async -> String? {
-        guard let url = URL(string: url) else {
-            return nil
-        }
-        
-        do {
-            let html = try String(contentsOf: url, encoding: .utf8)
-            let doc = try SwiftSoup.parse(html)
-            let thumbnail = try doc.select("meta[property=og:image]").first()
-            return try thumbnail?.attr("content")
-        } catch {
-            print("Error getting thumbnail URL: \(error.localizedDescription)")
-            return nil
         }
     }
     
@@ -125,23 +101,26 @@ struct FullScreenVideoThumbnailView: View {
             }
         }
         .task {
-            thumbnailUrl = await getThumbnailUrl()
+            thumbnailUrl = await getThumbnailUrl(url: url)
         }
     }
+}
+
+func getThumbnailUrl(url: String) async -> String? {
+    guard let url = URL(string: url) else {
+        return nil
+    }
     
-    private func getThumbnailUrl() async -> String? {
-        guard let url = URL(string: url) else {
-            return nil
+    do {
+        let html = try String(contentsOf: url, encoding: .utf8)
+        let doc = try SwiftSoup.parse(html)
+        var thumbnail: Element? = try doc.select("meta[property=og:image]").first()
+        if thumbnail == nil {
+            thumbnail = try doc.select("link[rel=image_src]").first()
         }
-        
-        do {
-            let html = try String(contentsOf: url, encoding: .utf8)
-            let doc = try SwiftSoup.parse(html)
-            let thumbnail = try doc.select("meta[property=og:image]").first()
-            return try thumbnail?.attr("content")
-        } catch {
-            print("Error getting thumbnail URL: \(error.localizedDescription)")
-            return nil
-        }
+        return try thumbnail?.attr("content")
+    } catch {
+        print("Error getting thumbnail URL: \(error.localizedDescription)")
+        return nil
     }
 }

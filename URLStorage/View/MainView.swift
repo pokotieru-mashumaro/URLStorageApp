@@ -93,7 +93,6 @@ struct MainView: View {
                                 columns =  Array(repeating: GridItem(.flexible()), count: 2)
                             }
                         }
-                        
                         //公開後
                         Button("レビュー") {
                             if let url = URL(string: "https://itunes.apple.com/app/idYOUR_APPLE_ID?action=write-review") {

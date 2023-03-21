@@ -199,6 +199,12 @@ struct NavigationDestinationView: View {
                     Spacer()
                     
                     if !(item.url?.isEmpty ?? false) {
+                        if URL(string: item.url!) == nil {
+                            Text("URLが存在しません")
+                                .frame(width: 150)
+                                .font(.caption2)
+                                .foregroundColor(getColor(color: groups.color ?? ""))
+                        } else {
                         Link(destination: URL(string: item.url!)!) {
                             Text("リンクへ移動")
                                 .frame(width: 150)
@@ -213,6 +219,7 @@ struct NavigationDestinationView: View {
                             item.itemtimestamp = Date()
                             try! context.save()
                         }
+                    }
                     }
                 }
                 .frame(height: 25)

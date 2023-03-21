@@ -97,7 +97,7 @@ struct MainView: View {
                         }
                         //公開後
                         Button("レビュー") {
-                            if let url = URL(string: "https://itunes.apple.com/app/idYOUR_APPLE_ID?action=write-review") {
+                            if let url = URL(string: "https://itunes.apple.com/app/id6446472219?action=write-review") {
                                 UIApplication.shared.open(url)
                             }
                         }

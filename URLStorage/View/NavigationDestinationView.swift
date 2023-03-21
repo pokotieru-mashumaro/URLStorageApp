@@ -47,6 +47,10 @@ struct NavigationDestinationView: View {
             groupItems = helper.getItem(groups: groups)
             interstitial.LoadInterstitial()
         }
+        .refreshable {
+            groupItems = []
+            groupItems = helper.getItem(groups: groups)
+        }
         .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "検索") {
             let matchedItems = self.groupItems.filter { item in
                 return item.itemtitle?.contains(self.searchText) ?? false
@@ -133,6 +137,7 @@ struct NavigationDestinationView: View {
         }
         .sheet(item: $editItem) { item in
             EditItemView(groupItem: item) {
+                groupItems = []
                 groupItems = helper.getItem(groups: groups)
             }
         }

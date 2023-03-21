@@ -21,7 +21,7 @@ struct BannerView: UIViewRepresentable {
         let bannerView = GADBannerView()
         bannerView.delegate = context.coordinator
         bannerView.rootViewController = viewController
-        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.adUnitID = "ca-app-pub-6121519581617103/6190426642"
         let request = GADRequest()
         request.scene = windowScene
         bannerView.load(request)

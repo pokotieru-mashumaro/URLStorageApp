@@ -83,6 +83,10 @@ struct MainView: View {
                     AppStoreReview.requestIfNeeded()
                 }
             })
+            .refreshable {
+                groups = []
+                groups = helper.getFolder(context: context)
+            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Menu {
@@ -131,6 +135,7 @@ struct MainView: View {
         }
         .sheet(item: $editGroup) { group in
             EditGroupView(group: group) {
+                groups = []
                 groups = helper.getFolder(context: context)
             }
         }

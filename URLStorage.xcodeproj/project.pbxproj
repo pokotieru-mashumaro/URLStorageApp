@@ -34,7 +34,42 @@
 		B9B8AAF729BB4A72007C36CA /* GroupItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B8AAF329BB4A72007C36CA /* GroupItem+CoreDataProperties.swift */; };
 		B9B8AAF829BB4A72007C36CA /* Groups+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B8AAF429BB4A72007C36CA /* Groups+CoreDataClass.swift */; };
 		B9B8AAF929BB4A72007C36CA /* Groups+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B8AAF529BB4A72007C36CA /* Groups+CoreDataProperties.swift */; };
+		B9CAA19729CC2499004173F4 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9CAA17A29CC1CBE004173F4 /* WidgetKit.framework */; };
+		B9CAA19829CC2499004173F4 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9CAA17C29CC1CBE004173F4 /* SwiftUI.framework */; };
+		B9CAA19B29CC2499004173F4 /* URLVaultWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CAA19A29CC2499004173F4 /* URLVaultWidgetBundle.swift */; };
+		B9CAA19D29CC2499004173F4 /* URLVaultWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CAA19C29CC2499004173F4 /* URLVaultWidget.swift */; };
+		B9CAA19F29CC249B004173F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9CAA19E29CC249B004173F4 /* Assets.xcassets */; };
+		B9CAA1A329CC249B004173F4 /* URLVaultWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B9CAA19629CC2499004173F4 /* URLVaultWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B9CAA1A829CC26E3004173F4 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B8AAC729BB45E0007C36CA /* Persistence.swift */; };
+		B9CAA1A929CC26EC004173F4 /* URLStorage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B9B8AAC929BB45E0007C36CA /* URLStorage.xcdatamodeld */; };
+		B9CAA1AB29CC3510004173F4 /* AdMobRewardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CAA1AA29CC3510004173F4 /* AdMobRewardView.swift */; };
+		B9CAA1AD29CC5193004173F4 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CAA1AC29CC5193004173F4 /* UserDefaultsExtension.swift */; };
+		B9CAA1AF29CC9566004173F4 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CAA1AE29CC9566004173F4 /* UserDefaultsExtension.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B9CAA1A129CC249B004173F4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B9B8AAB329BB45DE007C36CA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B9CAA19529CC2499004173F4;
+			remoteInfo = URLVaultWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B9CAA18E29CC1CC1004173F4 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				B9CAA1A329CC249B004173F4 /* URLVaultWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		52D2A15653F79ADAD53662CF /* Pods_URLStorage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_URLStorage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,6 +101,17 @@
 		B9B8AAF329BB4A72007C36CA /* GroupItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroupItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B9B8AAF429BB4A72007C36CA /* Groups+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Groups+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B9B8AAF529BB4A72007C36CA /* Groups+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Groups+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B9CAA17A29CC1CBE004173F4 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		B9CAA17C29CC1CBE004173F4 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		B9CAA19629CC2499004173F4 /* URLVaultWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = URLVaultWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9CAA19A29CC2499004173F4 /* URLVaultWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLVaultWidgetBundle.swift; sourceTree = "<group>"; };
+		B9CAA19C29CC2499004173F4 /* URLVaultWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLVaultWidget.swift; sourceTree = "<group>"; };
+		B9CAA19E29CC249B004173F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B9CAA1A029CC249B004173F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B9CAA1A729CC2611004173F4 /* URLVaultWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = URLVaultWidgetExtension.entitlements; sourceTree = "<group>"; };
+		B9CAA1AA29CC3510004173F4 /* AdMobRewardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdMobRewardView.swift; sourceTree = "<group>"; };
+		B9CAA1AC29CC5193004173F4 /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
+		B9CAA1AE29CC9566004173F4 /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
 		B9EE179629C7550B007297A8 /* URLStorage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = URLStorage.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,13 +126,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B9CAA19329CC2499004173F4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B9CAA19829CC2499004173F4 /* SwiftUI.framework in Frameworks */,
+				B9CAA19729CC2499004173F4 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		B9B8AAB229BB45DE007C36CA = {
 			isa = PBXGroup;
 			children = (
+				B9CAA1A729CC2611004173F4 /* URLVaultWidgetExtension.entitlements */,
 				B9B8AABD29BB45DE007C36CA /* URLStorage */,
+				B9CAA19929CC2499004173F4 /* URLVaultWidget */,
 				B9B8AABC29BB45DE007C36CA /* Products */,
 				CBB12AAE4A006A7C18BA1D44 /* Pods */,
 				E3E55E32637F3324A32FF772 /* Frameworks */,
@@ -97,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				B9B8AABB29BB45DE007C36CA /* URLStorage.app */,
+				B9CAA19629CC2499004173F4 /* URLVaultWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -139,6 +197,7 @@
 				B999219729BDEC2300FAAE24 /* EditItemView.swift */,
 				B90C6EE429C2F3EC00A11205 /* AdMobBannerView.swift */,
 				B90C6EE729C3268C00A11205 /* AdMobInterstitialView.swift */,
+				B9CAA1AA29CC3510004173F4 /* AdMobRewardView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -148,6 +207,7 @@
 			children = (
 				B9B8AAD629BB46C1007C36CA /* DataExtension.swift */,
 				B9B8AAD829BB46E5007C36CA /* ViewExtension.swift */,
+				B9CAA1AE29CC9566004173F4 /* UserDefaultsExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -182,6 +242,18 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
+		B9CAA19929CC2499004173F4 /* URLVaultWidget */ = {
+			isa = PBXGroup;
+			children = (
+				B9CAA19A29CC2499004173F4 /* URLVaultWidgetBundle.swift */,
+				B9CAA19C29CC2499004173F4 /* URLVaultWidget.swift */,
+				B9CAA1AC29CC5193004173F4 /* UserDefaultsExtension.swift */,
+				B9CAA19E29CC249B004173F4 /* Assets.xcassets */,
+				B9CAA1A029CC249B004173F4 /* Info.plist */,
+			);
+			path = URLVaultWidget;
+			sourceTree = "<group>";
+		};
 		CBB12AAE4A006A7C18BA1D44 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -195,6 +267,8 @@
 			isa = PBXGroup;
 			children = (
 				52D2A15653F79ADAD53662CF /* Pods_URLStorage.framework */,
+				B9CAA17A29CC1CBE004173F4 /* WidgetKit.framework */,
+				B9CAA17C29CC1CBE004173F4 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -211,10 +285,12 @@
 				B9B8AAB829BB45DE007C36CA /* Frameworks */,
 				B9B8AAB929BB45DE007C36CA /* Resources */,
 				9B5C54188309781A0A46C91B /* [CP] Embed Pods Frameworks */,
+				B9CAA18E29CC1CC1004173F4 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				B9CAA1A229CC249B004173F4 /* PBXTargetDependency */,
 			);
 			name = URLStorage;
 			packageProductDependencies = (
@@ -224,6 +300,23 @@
 			productName = URLStorage;
 			productReference = B9B8AABB29BB45DE007C36CA /* URLStorage.app */;
 			productType = "com.apple.product-type.application";
+		};
+		B9CAA19529CC2499004173F4 /* URLVaultWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B9CAA1A429CC249B004173F4 /* Build configuration list for PBXNativeTarget "URLVaultWidgetExtension" */;
+			buildPhases = (
+				B9CAA19229CC2499004173F4 /* Sources */,
+				B9CAA19329CC2499004173F4 /* Frameworks */,
+				B9CAA19429CC2499004173F4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = URLVaultWidgetExtension;
+			productName = URLVaultWidgetExtension;
+			productReference = B9CAA19629CC2499004173F4 /* URLVaultWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -236,6 +329,9 @@
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
 					B9B8AABA29BB45DE007C36CA = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					B9CAA19529CC2499004173F4 = {
 						CreatedOnToolsVersion = 14.2;
 					};
 				};
@@ -258,6 +354,7 @@
 			projectRoot = "";
 			targets = (
 				B9B8AABA29BB45DE007C36CA /* URLStorage */,
+				B9CAA19529CC2499004173F4 /* URLVaultWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -269,6 +366,14 @@
 			files = (
 				B9B8AAC629BB45E0007C36CA /* Preview Assets.xcassets in Resources */,
 				B9B8AAC329BB45E0007C36CA /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B9CAA19429CC2499004173F4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B9CAA19F29CC249B004173F4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,11 +430,13 @@
 				B9B8AAE729BB47CE007C36CA /* addTaskGroupView.swift in Sources */,
 				B90C6EE529C2F3EC00A11205 /* AdMobBannerView.swift in Sources */,
 				B9B8AADD29BB473C007C36CA /* VideoThumbnailView.swift in Sources */,
+				B9CAA1AB29CC3510004173F4 /* AdMobRewardView.swift in Sources */,
 				B9B8AADB29BB4701007C36CA /* MainView.swift in Sources */,
 				B96B80AE29BE07EF00C6FF73 /* FullScreenImageView.swift in Sources */,
 				B9B8AAF729BB4A72007C36CA /* GroupItem+CoreDataProperties.swift in Sources */,
 				B9B8AAF929BB4A72007C36CA /* Groups+CoreDataProperties.swift in Sources */,
 				B90C6EE829C3268C00A11205 /* AdMobInterstitialView.swift in Sources */,
+				B9CAA1AF29CC9566004173F4 /* UserDefaultsExtension.swift in Sources */,
 				B9B8AAC829BB45E0007C36CA /* Persistence.swift in Sources */,
 				B9B8AAF829BB4A72007C36CA /* Groups+CoreDataClass.swift in Sources */,
 				B9B8AABF29BB45DE007C36CA /* URLStorageApp.swift in Sources */,
@@ -346,7 +453,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B9CAA19229CC2499004173F4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B9CAA1A829CC26E3004173F4 /* Persistence.swift in Sources */,
+				B9CAA1AD29CC5193004173F4 /* UserDefaultsExtension.swift in Sources */,
+				B9CAA19D29CC2499004173F4 /* URLVaultWidget.swift in Sources */,
+				B9CAA19B29CC2499004173F4 /* URLVaultWidgetBundle.swift in Sources */,
+				B9CAA1A929CC26EC004173F4 /* URLStorage.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B9CAA1A229CC249B004173F4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B9CAA19529CC2499004173F4 /* URLVaultWidgetExtension */;
+			targetProxy = B9CAA1A129CC249B004173F4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		B9B8AACD29BB45E0007C36CA /* Debug */ = {
@@ -467,6 +594,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B4B3479DEFA8F2925C8358E3 /* Pods-URLStorage.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = URLStorage/URLStorage.entitlements;
@@ -500,6 +628,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B1917C795A4C65CFE71A7E81 /* Pods-URLStorage.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = URLStorage/URLStorage.entitlements;
@@ -529,6 +658,62 @@
 			};
 			name = Release;
 		};
+		B9CAA1A529CC249B004173F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = URLVaultWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G4P24S754F;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = URLVaultWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = URLVaultWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kotaro.URLVaultApp.URLVaultWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B9CAA1A629CC249B004173F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = URLVaultWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G4P24S754F;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = URLVaultWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = URLVaultWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kotaro.URLVaultApp.URLVaultWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -546,6 +731,15 @@
 			buildConfigurations = (
 				B9B8AAD029BB45E0007C36CA /* Debug */,
 				B9B8AAD129BB45E0007C36CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B9CAA1A429CC249B004173F4 /* Build configuration list for PBXNativeTarget "URLVaultWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B9CAA1A529CC249B004173F4 /* Debug */,
+				B9CAA1A629CC249B004173F4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

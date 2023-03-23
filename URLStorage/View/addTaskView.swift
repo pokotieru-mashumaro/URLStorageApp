@@ -96,7 +96,7 @@ struct addTaskView: View {
                     
                     Toggle("URL", isOn: $urlFlag)
                         .fontWeight(.bold)
-                        .toggleStyle(SwitchToggleStyle(tint: .blue))
+                        .toggleStyle(SwitchToggleStyle(tint: getColor(color: groups.color ?? "")))
                     
                     if urlFlag {
                         HStack {
@@ -123,8 +123,8 @@ struct addTaskView: View {
                     
                     Toggle("コメント", isOn: $feelingFlag)
                         .fontWeight(.bold)
-                        .toggleStyle(SwitchToggleStyle(tint: .blue))
-                    
+                        .toggleStyle(SwitchToggleStyle(tint: getColor(color: groups.color ?? "")))
+
                     if feelingFlag {
                         TextEditor(text: $articleText)
                             .scrollContentBackground(Visibility.hidden)

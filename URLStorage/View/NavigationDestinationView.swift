@@ -6,11 +6,17 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct NavigationDestinationView: View {
     @Environment(\.managedObjectContext) var context
     @EnvironmentObject private var sceneDelegate: MySceneDelegate
     @ObservedObject var interstitial = Interstitial()
+    @ObservedObject  var reward = Reward()
+    
+    @AppStorage("widgetItem") var widgetItemURL = ""
+    @State var widgetAlert: Bool = false
+    @State var rewardAlert: Bool = false
     
     let groups: Groups
     let helper = CoreDataHelper()
@@ -30,6 +36,7 @@ struct NavigationDestinationView: View {
     @State var searchText = ""
     //@FocusState  var isFocused: Bool
     
+    
     var onBack: () -> ()
     
     var body: some View {
@@ -45,6 +52,7 @@ struct NavigationDestinationView: View {
         }
         .onAppear {
             groupItems = helper.getItem(groups: groups)
+            reward.loadReward()
             interstitial.LoadInterstitial()
         }
         .refreshable {
@@ -189,8 +197,17 @@ struct NavigationDestinationView: View {
                     
                     Spacer()
                     
-                    Button("編集") {
-                        editItem = item
+                    HStack(spacing: 8) {
+                        Button {
+                            widgetAlert.toggle()
+                        } label: {
+                            Image(systemName: item.url == widgetItemURL ? "star.fill" : "star")
+                                .frame(width: 20, height: 20)
+                        }
+                        
+                        Button("編集") {
+                            editItem = item
+                        }
                     }
                     .foregroundColor(getColor(color: groups.color ?? "").opacity(0.7))
                     .vAlign(.topTrailing)
@@ -252,6 +269,42 @@ struct NavigationDestinationView: View {
                 deleteItems.append(item)
             }
         }
+        .alert("注意", isPresented: $widgetAlert){
+            Button("設定"){
+                if reward.rewardLoaded {
+                    reward.showReward()
+                    widgetItemURL = item.url ?? ""
+                    userdefaultSave(item: item)
+                    
+                    WidgetCenter.shared.reloadAllTimelines()
+                } else {
+                    reward.loadReward()
+                    rewardAlert = true
+                }
+            }
+            
+            Button("キャンセル", role: .cancel){
+                widgetAlert.toggle()
+            }
+        } message: {
+            Text("CMを見てウィジェットに設定しますか？")
+        }
+        .alert(isPresented: $rewardAlert) {
+                   Alert(title: Text("CMの読み込みに失敗しました"),
+                         message: Text("しばらく時間をおいてお試しください"),
+                         dismissButton: .default(Text("了解")))  // ボタンの変更
+               }
+    }
+    
+    private func userdefaultSave(item: GroupItem) {
+        let userDefaults = UserDefaults(suiteName: "group.com.kotaro.URLVaultApp")
+
+        // データを保存する
+        userDefaults?.set(item.itemtitle, forKey: "title")
+        userDefaults?.set(item.url, forKey: "url")
+
+        // 変更を保存する
+        userDefaults?.synchronize()
     }
 }
 

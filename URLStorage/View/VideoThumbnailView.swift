@@ -11,12 +11,16 @@ import Kingfisher
 
 struct VideoThumbnailView: View {
     let url: String
+    var widget: (UIImage) -> ()
     @State var thumbnailUrl: String?
     
     var body: some View {
         VStack {
             if let thumbnailUrl = thumbnailUrl {
                 KFImage.url(URL(string: thumbnailUrl))
+                    .onSuccess { result in
+                        widget(result.image)
+                    }
                     .placeholder {
                         ZStack {
                             Color.gray

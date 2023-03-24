@@ -36,8 +36,8 @@
 		B9B8AAF929BB4A72007C36CA /* Groups+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B8AAF529BB4A72007C36CA /* Groups+CoreDataProperties.swift */; };
 		B9CAA19729CC2499004173F4 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9CAA17A29CC1CBE004173F4 /* WidgetKit.framework */; };
 		B9CAA19829CC2499004173F4 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9CAA17C29CC1CBE004173F4 /* SwiftUI.framework */; };
-		B9CAA19B29CC2499004173F4 /* URLVaultWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CAA19A29CC2499004173F4 /* URLVaultWidgetBundle.swift */; };
-		B9CAA19D29CC2499004173F4 /* URLVaultWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CAA19C29CC2499004173F4 /* URLVaultWidget.swift */; };
+		B9CAA19B29CC2499004173F4 /* URLVaultWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CAA19A29CC2499004173F4 /* URLVaultWidget.swift */; };
+		B9CAA19D29CC2499004173F4 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CAA19C29CC2499004173F4 /* Provider.swift */; };
 		B9CAA19F29CC249B004173F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9CAA19E29CC249B004173F4 /* Assets.xcassets */; };
 		B9CAA1A329CC249B004173F4 /* URLVaultWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B9CAA19629CC2499004173F4 /* URLVaultWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B9CAA1A829CC26E3004173F4 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B8AAC729BB45E0007C36CA /* Persistence.swift */; };
@@ -45,6 +45,11 @@
 		B9CAA1AB29CC3510004173F4 /* AdMobRewardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CAA1AA29CC3510004173F4 /* AdMobRewardView.swift */; };
 		B9CAA1AD29CC5193004173F4 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CAA1AC29CC5193004173F4 /* UserDefaultsExtension.swift */; };
 		B9CAA1AF29CC9566004173F4 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CAA1AE29CC9566004173F4 /* UserDefaultsExtension.swift */; };
+		B9CAA1B529CCB682004173F4 /* MediumSizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CAA1B429CCB682004173F4 /* MediumSizeView.swift */; };
+		B9CAA1B629CCB686004173F4 /* SmallSizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CAA1B229CCB65D004173F4 /* SmallSizeView.swift */; };
+		B9CAA1B829CCB6A8004173F4 /* LargeSizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CAA1B729CCB6A8004173F4 /* LargeSizeView.swift */; };
+		B9CAA1BC29CCBD0B004173F4 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = B9CAA1BB29CCBD0B004173F4 /* SwiftSoup */; };
+		B9CAA1BE29CCBD12004173F4 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = B9CAA1BD29CCBD12004173F4 /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,14 +109,17 @@
 		B9CAA17A29CC1CBE004173F4 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		B9CAA17C29CC1CBE004173F4 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		B9CAA19629CC2499004173F4 /* URLVaultWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = URLVaultWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		B9CAA19A29CC2499004173F4 /* URLVaultWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLVaultWidgetBundle.swift; sourceTree = "<group>"; };
-		B9CAA19C29CC2499004173F4 /* URLVaultWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLVaultWidget.swift; sourceTree = "<group>"; };
+		B9CAA19A29CC2499004173F4 /* URLVaultWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLVaultWidget.swift; sourceTree = "<group>"; };
+		B9CAA19C29CC2499004173F4 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
 		B9CAA19E29CC249B004173F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B9CAA1A029CC249B004173F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B9CAA1A729CC2611004173F4 /* URLVaultWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = URLVaultWidgetExtension.entitlements; sourceTree = "<group>"; };
 		B9CAA1AA29CC3510004173F4 /* AdMobRewardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdMobRewardView.swift; sourceTree = "<group>"; };
 		B9CAA1AC29CC5193004173F4 /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
 		B9CAA1AE29CC9566004173F4 /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
+		B9CAA1B229CCB65D004173F4 /* SmallSizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallSizeView.swift; sourceTree = "<group>"; };
+		B9CAA1B429CCB682004173F4 /* MediumSizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumSizeView.swift; sourceTree = "<group>"; };
+		B9CAA1B729CCB6A8004173F4 /* LargeSizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeSizeView.swift; sourceTree = "<group>"; };
 		B9EE179629C7550B007297A8 /* URLStorage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = URLStorage.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -130,8 +138,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9CAA1BE29CCBD12004173F4 /* Kingfisher in Frameworks */,
 				B9CAA19829CC2499004173F4 /* SwiftUI.framework in Frameworks */,
 				B9CAA19729CC2499004173F4 /* WidgetKit.framework in Frameworks */,
+				B9CAA1BC29CCBD0B004173F4 /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,13 +255,24 @@
 		B9CAA19929CC2499004173F4 /* URLVaultWidget */ = {
 			isa = PBXGroup;
 			children = (
-				B9CAA19A29CC2499004173F4 /* URLVaultWidgetBundle.swift */,
-				B9CAA19C29CC2499004173F4 /* URLVaultWidget.swift */,
+				B9CAA19A29CC2499004173F4 /* URLVaultWidget.swift */,
+				B9CAA1B029CCB63F004173F4 /* View */,
+				B9CAA19C29CC2499004173F4 /* Provider.swift */,
 				B9CAA1AC29CC5193004173F4 /* UserDefaultsExtension.swift */,
 				B9CAA19E29CC249B004173F4 /* Assets.xcassets */,
 				B9CAA1A029CC249B004173F4 /* Info.plist */,
 			);
 			path = URLVaultWidget;
+			sourceTree = "<group>";
+		};
+		B9CAA1B029CCB63F004173F4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B9CAA1B229CCB65D004173F4 /* SmallSizeView.swift */,
+				B9CAA1B429CCB682004173F4 /* MediumSizeView.swift */,
+				B9CAA1B729CCB6A8004173F4 /* LargeSizeView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		CBB12AAE4A006A7C18BA1D44 /* Pods */ = {
@@ -314,6 +335,10 @@
 			dependencies = (
 			);
 			name = URLVaultWidgetExtension;
+			packageProductDependencies = (
+				B9CAA1BB29CCBD0B004173F4 /* SwiftSoup */,
+				B9CAA1BD29CCBD12004173F4 /* Kingfisher */,
+			);
 			productName = URLVaultWidgetExtension;
 			productReference = B9CAA19629CC2499004173F4 /* URLVaultWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -457,11 +482,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9CAA1B529CCB682004173F4 /* MediumSizeView.swift in Sources */,
+				B9CAA1B629CCB686004173F4 /* SmallSizeView.swift in Sources */,
 				B9CAA1A829CC26E3004173F4 /* Persistence.swift in Sources */,
 				B9CAA1AD29CC5193004173F4 /* UserDefaultsExtension.swift in Sources */,
-				B9CAA19D29CC2499004173F4 /* URLVaultWidget.swift in Sources */,
-				B9CAA19B29CC2499004173F4 /* URLVaultWidgetBundle.swift in Sources */,
+				B9CAA19D29CC2499004173F4 /* Provider.swift in Sources */,
+				B9CAA19B29CC2499004173F4 /* URLVaultWidget.swift in Sources */,
 				B9CAA1A929CC26EC004173F4 /* URLStorage.xcdatamodeld in Sources */,
+				B9CAA1B829CCB6A8004173F4 /* LargeSizeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -772,6 +800,16 @@
 			productName = SwiftSoup;
 		};
 		B9B8AAE429BB47B6007C36CA /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B9B8AAE329BB47B6007C36CA /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		B9CAA1BB29CCBD0B004173F4 /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B9B8AAE029BB47AC007C36CA /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
+		};
+		B9CAA1BD29CCBD12004173F4 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B9B8AAE329BB47B6007C36CA /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;

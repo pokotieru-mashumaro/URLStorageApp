@@ -7,6 +7,7 @@
 
 import SwiftUI
 import WidgetKit
+import Kingfisher
 
 struct NavigationDestinationView: View {
     @Environment(\.managedObjectContext) var context
@@ -14,8 +15,17 @@ struct NavigationDestinationView: View {
     @ObservedObject var interstitial = Interstitial()
     @ObservedObject  var reward = Reward()
     
+    enum widgetAlertType {
+        case usually
+        case rewardError
+        case noUrl
+    }
     @AppStorage("widgetItem") var widgetItemURL = ""
     @State var widgetAlert: Bool = false
+    @State var widgetImage: UIImage?
+    @State var widgetImageAlert: Bool = false
+    @State private var alertType: widgetAlertType = .usually
+    
     @State var rewardAlert: Bool = false
     
     let groups: Groups
@@ -173,7 +183,13 @@ struct NavigationDestinationView: View {
             VStack {
                 HStack(spacing: 30) {
                     if item.itemimage == nil {
-                        VideoThumbnailView(url: item.url ?? "")
+                        VideoThumbnailView(url: item.url ?? "") { uiimage in
+                            Task {
+                                if item.url == widgetItemURL {
+                                    widgetImage = uiimage
+                                }
+                            }
+                        }
                             .onTapGesture {
                                 zoomImage = item
                                 isZoomed.toggle()
@@ -199,7 +215,7 @@ struct NavigationDestinationView: View {
                     
                     HStack(spacing: 8) {
                         Button {
-                            widgetAlert.toggle()
+                            widgetButtonFunc(item: item)
                         } label: {
                             Image(systemName: item.url == widgetItemURL ? "star.fill" : "star")
                                 .frame(width: 20, height: 20)
@@ -269,31 +285,28 @@ struct NavigationDestinationView: View {
                 deleteItems.append(item)
             }
         }
-        .alert("注意", isPresented: $widgetAlert){
-            Button("設定"){
-                if reward.rewardLoaded {
+        .alert(isPresented: $widgetAlert) {
+            switch alertType {
+            case .usually:
+                return Alert(title: Text("注意"),
+                             message: Text("CMを見てウィジェットに設定しますか？"),
+                             primaryButton: .default(Text("設定")){
                     reward.showReward()
-                    widgetItemURL = item.url ?? ""
                     userdefaultSave(item: item)
-                    
                     WidgetCenter.shared.reloadAllTimelines()
-                } else {
-                    reward.loadReward()
-                    rewardAlert = true
-                }
+                    widgetImage = nil
+                },
+                             secondaryButton: .destructive(Text("キャンセル")))
+            case .rewardError:
+                return Alert(title: Text("CMの読み込みに失敗しました"),
+                      message: Text("しばらく時間をおいてお試しください"),
+                      dismissButton: .default(Text("了解")))  // ボタンの変更
+            case .noUrl:
+                return Alert(title: Text("URLが指定されていません"),
+                      message: Text("ウィジェットはURLを指定しているものが対象です"),
+                      dismissButton: .default(Text("了解")))  // ボタンの変更
             }
-            
-            Button("キャンセル", role: .cancel){
-                widgetAlert.toggle()
-            }
-        } message: {
-            Text("CMを見てウィジェットに設定しますか？")
         }
-        .alert(isPresented: $rewardAlert) {
-                   Alert(title: Text("CMの読み込みに失敗しました"),
-                         message: Text("しばらく時間をおいてお試しください"),
-                         dismissButton: .default(Text("了解")))  // ボタンの変更
-               }
     }
     
     private func userdefaultSave(item: GroupItem) {
@@ -302,9 +315,51 @@ struct NavigationDestinationView: View {
         // データを保存する
         userDefaults?.set(item.itemtitle, forKey: "title")
         userDefaults?.set(item.url, forKey: "url")
-
+        userDefaults?.setUIImageToData(image: widgetImage!, forKey: "image")
         // 変更を保存する
         userDefaults?.synchronize()
+    }
+    
+    private func widgetButtonFunc(item :GroupItem) {
+        widgetAlert.toggle()
+        widgetItemURL = item.url ?? ""
+        guard widgetItemURL != "" else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                alertType = .noUrl
+            }
+            return
+        }
+        guard reward.rewardLoaded else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                alertType = .rewardError
+                reward.loadReward()
+            }
+            return
+        }
+        if item.itemimage != nil {
+            //スクレイピングのサムネはVideoThumbnailViewのクロージャで
+            widgetImage = UIImage(data: item.itemimage!)!
+        }
+        alertType = .usually
+        Task {
+           // widgetImage = await getThumbnailImage(url: thumbnailUrl!)
+            if let thumbnailUrl = await getThumbnailUrl(url: widgetItemURL),
+               let url = URL(string: thumbnailUrl) {
+                let downloader = ImageDownloader.default
+                let options: KingfisherOptionsInfo = [.transition(.fade(0.3))]
+                
+                downloader.downloadImage(with: url, options: options) { result in
+                    switch result {
+                    case .success(let value):
+                        DispatchQueue.main.async {
+                            widgetImage = value.image
+                        }
+                    case .failure(let error):
+                        print("Error downloading image: \(error.localizedDescription)")
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -313,3 +368,6 @@ struct NavigationDestinationView_Previews: PreviewProvider {
         MainView()
     }
 }
+
+
+

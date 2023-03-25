@@ -19,8 +19,6 @@ struct MediumSizeView: View {
             
             VStack {
                 HStack(spacing: 16) {
-                    square(icon: "house")
-                                            
                     square(icon: "link.circle")
                 }
                 .offset(x: -10, y: 40)

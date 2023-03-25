@@ -112,24 +112,21 @@ struct URLVaultWidget_Previews: PreviewProvider {
     }
 }
 
-
-
-
-
-
 struct square: View {
+    @Environment(\.colorScheme) private var colorScheme
     var icon: String
     var body: some View {
         ZStack {
             Rectangle()
-                .frame(width: 55, height: 55)
-                .foregroundColor(.primary.opacity(0.6))
+                .frame(width: 110, height: 55)
+                .foregroundColor(colorScheme == .dark ? Color.black.opacity(0.6): Color.white.opacity(0.6))
                 .cornerRadius(15)
                 .shadow(color: Color.white, radius: 10)
             Image(systemName: icon)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 20, height: 20)
+                .foregroundColor(.primary)
         }
     }
 }

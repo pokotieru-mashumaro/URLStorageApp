@@ -21,9 +21,12 @@ struct SmallSizeView: View {
                     Spacer()
                     
                     HStack(spacing: 16) {
-                        square(icon: "house")
-                                                
-                        square(icon: "link.circle")
+                        Button {
+                            print("🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫")
+                        } label: {
+                            square(icon: "link.circle")
+                                .contentShape(Rectangle())
+                        }
                     }
                 }
                 .padding(.bottom, 6)

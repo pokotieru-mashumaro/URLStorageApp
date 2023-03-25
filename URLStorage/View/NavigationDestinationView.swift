@@ -314,6 +314,7 @@ struct NavigationDestinationView: View {
 
         // データを保存する
         userDefaults?.set(item.itemtitle, forKey: "title")
+        userDefaults?.set(item.group?.grouptitle, forKey: "group")
         userDefaults?.set(item.url, forKey: "url")
         userDefaults?.setUIImageToData(image: widgetImage!, forKey: "image")
         // 変更を保存する
@@ -342,7 +343,6 @@ struct NavigationDestinationView: View {
         }
         alertType = .usually
         Task {
-           // widgetImage = await getThumbnailImage(url: thumbnailUrl!)
             if let thumbnailUrl = await getThumbnailUrl(url: widgetItemURL),
                let url = URL(string: thumbnailUrl) {
                 let downloader = ImageDownloader.default

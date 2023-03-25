@@ -12,11 +12,11 @@ import Kingfisher
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), title: "", url: "", image: UIImage())
+        SimpleEntry(date: Date(), title: "", group: "", url: "", image: UIImage())
     }
 
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), title: "", url: "", image: UIImage())
+        let entry = SimpleEntry(date: Date(), title: "", group: "", url: "", image: UIImage())
         completion(entry)
     }
 
@@ -24,11 +24,13 @@ struct Provider: TimelineProvider {
         var entries: [SimpleEntry] = []
         
         var title = ""
+        var group = ""
         var url = ""
         var image = UIImage()
         let userDefaults = UserDefaults(suiteName: "group.com.kotaro.URLVaultApp")
         if let userDefaults = userDefaults {
             title = userDefaults.string(forKey: "title") ?? ""
+            group = userDefaults.string(forKey: "group") ?? ""
             url = userDefaults.string(forKey: "url") ?? ""
             image = userDefaults.image(forKey: "image")
         }
@@ -37,7 +39,7 @@ struct Provider: TimelineProvider {
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
             // UserDefaultsから取得した文字列をセット
-            let entry = SimpleEntry(date: entryDate, title: title, url: url, image: image)
+            let entry = SimpleEntry(date: entryDate, title: title, group: group, url: url, image: image)
             entries.append(entry)
         }
 
@@ -49,6 +51,7 @@ struct Provider: TimelineProvider {
 struct SimpleEntry: TimelineEntry {
     let date: Date
     let title: String
+    let group: String
     let url: String
     let image: UIImage
 }
@@ -107,7 +110,7 @@ struct URLVaultWidget: Widget {
 
 struct URLVaultWidget_Previews: PreviewProvider {
     static var previews: some View {
-        URLVaultWidgetEntryView(entry: SimpleEntry(date: Date(), title: "可愛い女の子", url: "https://www.xvideos.com/video70232767/_jd_https_bit.ly_3plygpd", image: UIImage()))
+        URLVaultWidgetEntryView(entry: SimpleEntry(date: Date(), title: "可愛い女の子", group: "", url: "https://www.xvideos.com/video70232767/_jd_https_bit.ly_3plygpd", image: UIImage()))
             .previewContext(WidgetPreviewContext(family: .systemLarge))
     }
 }

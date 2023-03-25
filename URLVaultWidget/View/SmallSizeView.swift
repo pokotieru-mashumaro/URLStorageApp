@@ -16,20 +16,16 @@ struct SmallSizeView: View {
             Image(uiImage: entry.image)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-      
-                VStack {
-                    Spacer()
-                    
-                    HStack(spacing: 16) {
-                        Button {
-                            print("🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫")
-                        } label: {
-                            square(icon: "link.circle")
-                                .contentShape(Rectangle())
-                        }
-                    }
+            
+            VStack {
+                Spacer()
+                
+                HStack(spacing: 16) {
+                    square(icon: "link.circle")
+                        .widgetURL(URL(string: "example://deeplink?from=widget"))
                 }
-                .padding(.bottom, 6)
+            }
+            .padding(.bottom, 6)
         }
     }
 }

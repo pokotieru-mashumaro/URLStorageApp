@@ -11,7 +11,7 @@ import WidgetKit
 struct LargeSizeView: View {
     @Environment(\.colorScheme) private var colorScheme
     var entry: SimpleEntry
-
+    
     var body: some View {
         ZStack {
             Image(uiImage: entry.image)
@@ -20,13 +20,9 @@ struct LargeSizeView: View {
             
             VStack {
                 HStack(spacing: 20) {
-                    Button {
-                        print("🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫🇨🇫")
-                        openURL(URL(string: entry.url)!)
-                    } label: {
-                        largeSquare(icon: "link.circle")
-                            .contentShape(Rectangle())
-                    }
+                    largeSquare(icon: "house")
+                        .widgetURL(URL(string: "urlvault://widgetlink?group_title=\(entry.group)"))
+                    
                 }
             }
             .offset(y: -10)
@@ -49,24 +45,6 @@ struct LargeSizeView: View {
                 .foregroundColor(.primary)
                 .scaledToFit()
                 .frame(width: 20, height: 20)
-        }
-    }
-    private func openURL(_ url: URL) {
-          let context = ExtensionContext()
-          context.open(url)
-      }
-}
-
-struct ExtensionContext {
-    func open(_ url: URL) {
-        let selector = sel_registerName("openURL:")
-        var responder = self as! UIResponder?
-        while responder != nil {
-            if responder!.responds(to: selector) {
-                responder!.perform(selector, with: url)
-                return
-            }
-            responder = responder?.next
         }
     }
 }

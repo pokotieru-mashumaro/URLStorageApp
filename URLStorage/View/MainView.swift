@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct MainView: View {
     init() {
@@ -20,17 +21,20 @@ struct MainView: View {
     @State var groups: [Groups] = []
     let helper = CoreDataHelper()
     
-    @State var isAdd: Bool = false
-    @State var editGroup: Groups?
-    @State var deleteAlert: Bool = false
-    @State var deleteGroup: Groups?
+    @State private var isAdd: Bool = false
+    @State private var editGroup: Groups?
+    @State private var deleteAlert: Bool = false
+    @State private var deleteGroup: Groups?
     //Grid関係
-    @State var columns = Array(repeating: GridItem(.flexible()), count: 2)
-    @State var columnsNumber: CGFloat = 2
-    var gridWidth: CGFloat { (UIScreen.main.bounds.width / columnsNumber)}
+    @State private var columns = Array(repeating: GridItem(.flexible()), count: 2)
+    @State private var columnsNumber: CGFloat = 2
+    private var gridWidth: CGFloat { (UIScreen.main.bounds.width / columnsNumber)}
     
     @State var currentGrid: Groups?
     @State var currentFolder: Groups?
+    
+    //
+    @State private var selectedItemForPresenting: Groups?
     
     var body: some View {
         NavigationStack(path: $path) {
@@ -133,10 +137,22 @@ struct MainView: View {
                 }
             }
         }
+        .onOpenURL{ url in
+            let uuid = getItemId(from: url)
+            if let uuid,
+               let item = fetchItem(id: uuid) {
+                selectedItemForPresenting = item
+            }
+        }
         .sheet(item: $editGroup) { group in
             EditGroupView(group: group) {
                 groups = []
                 groups = helper.getFolder(context: context)
+            }
+        }
+        .sheet(item: $selectedItemForPresenting) { group in
+            NavigationDestinationView(groups: group) {
+                
             }
         }
         .fullScreenCover(isPresented: $isAdd) {
@@ -185,6 +201,33 @@ struct MainView: View {
                 }
                 .cornerRadius(16)
                 .shadow(radius: 1)
+        }
+    }
+    
+    private func getItemId(from url: URL) -> UUID? {
+        guard let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true),
+              urlComponents.scheme == "urlvault",
+              urlComponents.host == "widgetlink",
+              urlComponents.queryItems?.first?.name == "group_title",
+              let uuidString = urlComponents.queryItems?.first?.value else {
+            return nil
+        }
+        return UUID(uuidString: uuidString)
+    }
+    
+    private func fetchItem(id uuid: UUID) -> Groups? {
+        let fetchRequest: NSFetchRequest<Groups> = Groups.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "grouptitle == %@", uuid as CVarArg)
+
+        do {
+            let items = try context.fetch(fetchRequest)
+            guard let item = items.first
+            else { return nil }
+            return item
+
+        } catch let error as NSError {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
     }
 }

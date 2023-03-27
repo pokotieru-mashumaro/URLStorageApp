@@ -43,9 +43,7 @@ struct NavigationDestinationView: View {
     @State private var isZoomed = false
     @State var zoomImage: GroupItem?
     
-    @State var searchText = ""
-    //@FocusState  var isFocused: Bool
-    
+    @State var searchText = ""    
     
     var onBack: () -> ()
     
@@ -293,8 +291,9 @@ struct NavigationDestinationView: View {
                              primaryButton: .default(Text("設定")){
                     reward.showReward()
                     userdefaultSave(item: item)
-                    WidgetCenter.shared.reloadAllTimelines()
                     widgetImage = nil
+                    WidgetCenter.shared.reloadAllTimelines()
+
                 },
                              secondaryButton: .destructive(Text("キャンセル")))
             case .rewardError:

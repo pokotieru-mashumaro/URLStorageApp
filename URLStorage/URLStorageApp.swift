@@ -16,9 +16,6 @@ struct URLStorageApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()
-                .onOpenURL { url in
-                    print(url)
-                }
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

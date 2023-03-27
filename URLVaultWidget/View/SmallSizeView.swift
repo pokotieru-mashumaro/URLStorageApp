@@ -21,8 +21,8 @@ struct SmallSizeView: View {
                 Spacer()
                 
                 HStack(spacing: 16) {
-                    square(icon: "link.circle")
-                        .widgetURL(URL(string: "example://deeplink?from=widget"))
+                    square(icon: "house")
+                        .widgetURL(URL(string: "urlvault://widgetlink?group_title=\(entry.group)"))
                 }
             }
             .padding(.bottom, 6)

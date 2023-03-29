@@ -21,6 +21,7 @@ class Reward: NSObject, ObservableObject ,GADFullScreenContentDelegate {
                 // 失敗
                 // 処理を終了
                 self.rewardLoaded = false
+                print("リワードロード失敗")
                 return
             }
             // 成功
@@ -28,6 +29,8 @@ class Reward: NSObject, ObservableObject ,GADFullScreenContentDelegate {
             self.rewardLoaded = true
             self.rewardedAd = ad
             self.rewardedAd?.fullScreenContentDelegate = self
+            print("リワードロード成功")
+
         })
     }
     
@@ -35,11 +38,14 @@ class Reward: NSObject, ObservableObject ,GADFullScreenContentDelegate {
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         let rootVC = windowScene?.windows.first?.rootViewController
         if let ad = rewardedAd {
+            print("リワードcm発動1")
             ad.present(fromRootViewController: rootVC!, userDidEarnRewardHandler: {
                 // 報酬を獲得
+                print("リワードcm発動2")
                 self.rewardLoaded = false
             })
         } else {
+            print("リワードcm失敗")
             self.rewardLoaded = false
             self.loadReward()
         }

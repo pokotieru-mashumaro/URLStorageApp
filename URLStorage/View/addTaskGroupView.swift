@@ -13,18 +13,24 @@ struct addTaskGroupView: View {
     @EnvironmentObject private var sceneDelegate: MySceneDelegate
     @Environment(\.dismiss) private var dismiss
     
-    let helper = CoreDataHelper()
-    @ObservedObject var aiHelper = OpenAIHelper()
+    private let helper = CoreDataHelper()
+    @ObservedObject private var aiHelper = OpenAIHelper()
+    @ObservedObject private var reward = Reward()
+    enum rewardAlertType {
+        case usually
+        case rewardError
+    }
+    @State private var alertType: rewardAlertType = .usually
+    @State private var rewardAlert: Bool = false
 
     //photo関係
-    @State var selectedImageData: Data?
-    @State var showImagePicker: Bool = false
-    @State var photoItem: PhotosPickerItem?
-    @State var imageURL: String = ""
-    @State var loadImage: Bool = false
-    @State var timeOut: Bool = false
+    @State private var selectedImageData: Data?
+    @State private var showImagePicker: Bool = false
+    @State private var photoItem: PhotosPickerItem?
+    @State private var imageURL: String = ""
+    @State private var loadImage: Bool = false
     
-    @State var titleText: String = ""
+    @State private var titleText: String = ""
     @State private var groupColor: GroupColor = GroupColor.gray
     var onAdd: () -> ()
     
@@ -70,6 +76,8 @@ struct addTaskGroupView: View {
                             .hAlign(.leading)
                         
                         Button {
+                            alertType = .usually
+                            rewardAlert.toggle()
                             send()
                         } label: {
                             Text("画像自動生成")
@@ -80,8 +88,9 @@ struct addTaskGroupView: View {
                                     RoundedRectangle(cornerRadius: 5, style: .continuous)
                                         .foregroundColor(groupColor.color.opacity(0.25))
                                 }
-                        }
-                        .disabled(titleText == "")
+                        }.onAppear() {
+                            reward.loadReward()
+                        }.disabled(titleText == "")
                     }
                 }
                 
@@ -119,6 +128,11 @@ struct addTaskGroupView: View {
                 }
                 
                 Button {
+//                    guard reward.rewardLoaded else {
+//                        reward.loadReward()
+//                        return
+//                    }
+//                    reward.showReward()
                     let color = groupColor.name
                     helper.groupSave(context: context, title: titleText, color: color, image: selectedImageData)
                     onAdd()
@@ -173,9 +187,19 @@ struct addTaskGroupView: View {
                     }
                 }
             }
-            .alert(isPresented: $timeOut) {
-                Alert(title: Text("生成失敗"),
-                      message: Text("タイトルが適切ではない可能性があります"))
+            .alert(isPresented: $rewardAlert) {
+                switch alertType {
+                case .usually:
+                    return Alert(title: Text("AIによる画像生成を行います"),
+                                 message: Text("不適切な単語がある場合、生成できない時があります"),
+                                 dismissButton: .default(Text("OK")) {
+                    })
+                    
+                    
+                case .rewardError:
+                    return Alert(title: Text("生成失敗"),
+                          message: Text("タイトルが適切ではない可能性があります"))
+                }
             }
             
             if loadImage {
@@ -230,19 +254,16 @@ struct addTaskGroupView: View {
     func send(){
         loadImage = true
         let promptToSend = titleText
-        var within15Seconds: Bool = true
+        var withinSeconds: Bool = true
         aiHelper.send(text: promptToSend) { response in
-            print("リワード広告")
-            
             DispatchQueue.main.async {
-                
                 self.imageURL = response.data.first?.url ?? ""
                 
                 guard let imageURL = URL(string: imageURL) else {
                     print("生成失敗")
                     print("url:", imageURL)
                     loadImage = false
-                    within15Seconds = false
+                    withinSeconds = false
                     return
                 }
                 
@@ -252,17 +273,16 @@ struct addTaskGroupView: View {
                     print("生成成功")
                     print("url:", imageURL)
                     loadImage = false
-                    within15Seconds = false
-                    
-                  //  onImageDate(UIImage(data: imageData!)!)
+                    withinSeconds = false
                 }.resume()
             }
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
-            if within15Seconds {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 30) {
+            if withinSeconds {
                 loadImage = false
                 print("タイムアウト")
-                timeOut.toggle()
+                alertType = .rewardError
+                rewardAlert.toggle()
             }
         }
     }

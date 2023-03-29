@@ -11,20 +11,19 @@ import PhotosUI
 struct EditItemView: View {
     let groupItem: GroupItem
     var onEdit: () -> ()
-    let helper = CoreDataHelper()
+    private let helper = CoreDataHelper()
     @Environment(\.managedObjectContext) var context
     @EnvironmentObject private var sceneDelegate: MySceneDelegate
     @Environment(\.dismiss) private var dismiss
     
     //photo関係
-    @State var selectedImageData: Data?
-    @State var showImagePicker: Bool = false
-    @State var photoItem: PhotosPickerItem?
+    @State private var selectedImageData: Data?
+    @State private var showImagePicker: Bool = false
+    @State private var photoItem: PhotosPickerItem?
     
-    @State var titleText: String = ""
-    @State var urlText: String = ""
-    @State var articleText: String = ""
-    
+    @State private var titleText: String = ""
+    @State private var urlText: String = ""
+    @State private var articleText: String = ""
     
     var body: some View {
         ScrollView(showsIndicators: false) {

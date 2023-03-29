@@ -14,12 +14,12 @@ struct MainView: View {
     }
     @Environment(\.managedObjectContext) var context
     @EnvironmentObject private var sceneDelegate: MySceneDelegate
-    @ObservedObject var interstitial = Interstitial()
+    @ObservedObject private var interstitial = Interstitial()
     
     @State var path: [Groups] = []
     
-    @State var groups: [Groups] = []
-    let helper = CoreDataHelper()
+    @State private var groups: [Groups] = []
+    private let helper = CoreDataHelper()
     
     @State private var isAdd: Bool = false
     @State private var editGroup: Groups?
@@ -30,8 +30,8 @@ struct MainView: View {
     @State private var columnsNumber: CGFloat = 2
     private var gridWidth: CGFloat { (UIScreen.main.bounds.width / columnsNumber)}
     
-    @State var currentGrid: Groups?
-    @State var currentFolder: Groups?
+    @State private var currentGrid: Groups?
+    @State private var currentFolder: Groups?
     
     //
     @State private var selectedItemForPresenting: Groups?

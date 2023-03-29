@@ -11,23 +11,23 @@ import PhotosUI
 struct addTaskView: View {
     let groups: Groups
     var onNext: () -> ()
-    let helper = CoreDataHelper()
+    private let helper = CoreDataHelper()
     @Environment(\.managedObjectContext) var context
     @EnvironmentObject private var sceneDelegate: MySceneDelegate
     @Environment(\.dismiss) private var dismiss
     
     //photo関係
-    @State var selectedImageData: Data?
-    @State var showImagePicker: Bool = false
-    @State var photoItem: PhotosPickerItem?
+    @State private var selectedImageData: Data?
+    @State private var showImagePicker: Bool = false
+    @State private var photoItem: PhotosPickerItem?
     
-    @State var titleText: String = ""
-    @State var articleText: String = ""
+    @State private var titleText: String = ""
+    @State private var articleText: String = ""
     
-    @State var urlFlag: Bool = false
-    @State var feelingFlag: Bool = false
-    @State var urlText: String = ""
-    @State var feelingText: String = ""
+    @State private var urlFlag: Bool = false
+    @State private var feelingFlag: Bool = false
+    @State private var urlText: String = ""
+    @State private var feelingText: String = ""
     
     var body: some View {
         ScrollView(showsIndicators: false) {

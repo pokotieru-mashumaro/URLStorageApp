@@ -180,6 +180,7 @@
 				B9B8AAFA29BB4A76007C36CA /* CoreData */,
 				B9B8AAD529BB4699007C36CA /* Model */,
 				B9B8AAD429BB468E007C36CA /* Heplers */,
+				B9C5706429D3DBF3008817C4 /* AdMob */,
 				B9B8AAD229BB4673007C36CA /* View */,
 				B9B8AAD329BB467D007C36CA /* Extensions */,
 				B9B8AABE29BB45DE007C36CA /* URLStorageApp.swift */,
@@ -209,9 +210,6 @@
 				B9B8AAE829BB47E6007C36CA /* addTaskView.swift */,
 				B999219529BDE78900FAAE24 /* EditGroupView.swift */,
 				B999219729BDEC2300FAAE24 /* EditItemView.swift */,
-				B90C6EE429C2F3EC00A11205 /* AdMobBannerView.swift */,
-				B90C6EE729C3268C00A11205 /* AdMobInterstitialView.swift */,
-				B9CAA1AA29CC3510004173F4 /* AdMobRewardView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -255,6 +253,16 @@
 				B9B8AAF329BB4A72007C36CA /* GroupItem+CoreDataProperties.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		B9C5706429D3DBF3008817C4 /* AdMob */ = {
+			isa = PBXGroup;
+			children = (
+				B90C6EE429C2F3EC00A11205 /* AdMobBannerView.swift */,
+				B90C6EE729C3268C00A11205 /* AdMobInterstitialView.swift */,
+				B9CAA1AA29CC3510004173F4 /* AdMobRewardView.swift */,
+			);
+			path = AdMob;
 			sourceTree = "<group>";
 		};
 		B9CAA19929CC2499004173F4 /* URLVaultWidget */ = {

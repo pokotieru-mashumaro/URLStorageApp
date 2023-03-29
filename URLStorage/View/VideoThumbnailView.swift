@@ -12,7 +12,7 @@ import Kingfisher
 struct VideoThumbnailView: View {
     let url: String
     var widget: (UIImage) -> ()
-    @State var thumbnailUrl: String?
+    @State private var thumbnailUrl: String?
     
     var body: some View {
         VStack {
@@ -46,7 +46,7 @@ struct VideoThumbnailView: View {
 
 struct AddOrEditVideoThumbnailView: View {
     @Binding var url: String
-    @State var thumbnailUrl: String?
+    @State private var thumbnailUrl: String?
     
     var body: some View {
         VStack {
@@ -93,7 +93,7 @@ struct AddOrEditVideoThumbnailView: View {
 
 struct FullScreenVideoThumbnailView: View {
     let url: String
-    @State var thumbnailUrl: String?
+    @State private var thumbnailUrl: String?
     
     var body: some View {
         VStack {

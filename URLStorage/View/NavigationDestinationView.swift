@@ -12,8 +12,8 @@ import Kingfisher
 struct NavigationDestinationView: View {
     @Environment(\.managedObjectContext) var context
     @EnvironmentObject private var sceneDelegate: MySceneDelegate
-    @ObservedObject var interstitial = Interstitial()
-    @ObservedObject  var reward = Reward()
+    @ObservedObject private var interstitial = Interstitial()
+    @ObservedObject  private var reward = Reward()
     
     enum widgetAlertType {
         case usually
@@ -21,29 +21,29 @@ struct NavigationDestinationView: View {
         case noUrl
     }
     @AppStorage("widgetItem") var widgetItemURL = ""
-    @State var widgetAlert: Bool = false
-    @State var widgetImage: UIImage?
-    @State var widgetImageAlert: Bool = false
+    @State private var widgetAlert: Bool = false
+    @State private var widgetImage: UIImage?
+    @State private var widgetImageAlert: Bool = false
     @State private var alertType: widgetAlertType = .usually
     
-    @State var rewardAlert: Bool = false
+    @State private var rewardAlert: Bool = false
     
     let groups: Groups
-    let helper = CoreDataHelper()
-    @State var groupItems: [GroupItem] = []
+    private let helper = CoreDataHelper()
+    @State private var groupItems: [GroupItem] = []
     
-    @State var isAdd: Bool = false
+    @State private var isAdd: Bool = false
     
-    @State var isDelete: Bool = false
-    @State var deleteItems: [GroupItem] = []
-    @State var deleteAlert: Bool = false
+    @State private var isDelete: Bool = false
+    @State private var deleteItems: [GroupItem] = []
+    @State private var deleteAlert: Bool = false
     
-    @State var editItem: GroupItem?
+    @State private var editItem: GroupItem?
     
     @State private var isZoomed = false
-    @State var zoomImage: GroupItem?
+    @State private var zoomImage: GroupItem?
     
-    @State var searchText = ""    
+    @State private var searchText = ""    
     
     var onBack: () -> ()
     
@@ -315,7 +315,7 @@ struct NavigationDestinationView: View {
         userDefaults?.set(item.itemtitle, forKey: "title")
         userDefaults?.set(item.group?.grouptitle, forKey: "group")
         userDefaults?.set(item.url, forKey: "url")
-        userDefaults?.setUIImageToData(image: widgetImage!, forKey: "image")
+        userDefaults?.setUIImageToData(image: widgetImage ?? UIImage(), forKey: "image")
         // 変更を保存する
         userDefaults?.synchronize()
     }

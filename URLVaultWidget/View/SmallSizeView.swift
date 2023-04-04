@@ -22,7 +22,7 @@ struct SmallSizeView: View {
                 
                 HStack(spacing: 16) {
                     square(icon: "house")
-                        .widgetURL(URL(string: "urlvault://widgetlink?group_title=\(entry.group)"))
+                       // .widgetURL(URL(string: "urlvault://widgetlink?group_title=\(entry.group)"))
                 }
             }
             .padding(.bottom, 6)

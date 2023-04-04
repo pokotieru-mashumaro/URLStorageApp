@@ -110,7 +110,7 @@ struct URLVaultWidget: Widget {
 
 struct URLVaultWidget_Previews: PreviewProvider {
     static var previews: some View {
-        URLVaultWidgetEntryView(entry: SimpleEntry(date: Date(), title: "可愛い女の子", group: "", url: "https://www.xvideos.com/video70232767/_jd_https_bit.ly_3plygpd", image: UIImage()))
+        URLVaultWidgetEntryView(entry: SimpleEntry(date: Date(), title: "可愛い女の子", group: "", url: "https://qiita.com/ken_sasaki2/items/698b28968b4fd72bbcf2", image: UIImage()))
             .previewContext(WidgetPreviewContext(family: .systemLarge))
     }
 }

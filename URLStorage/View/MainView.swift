@@ -137,13 +137,13 @@ struct MainView: View {
                 }
             }
         }
-        .onOpenURL{ url in
-            let uuid = getItemId(from: url)
-            if let uuid,
-               let item = fetchItem(id: uuid) {
-                selectedItemForPresenting = item
-            }
-        }
+//        .onOpenURL{ url in
+//            let uuid = getItemId(from: url)
+//            if let uuid,
+//               let item = fetchItem(id: uuid) {
+//                selectedItemForPresenting = item
+//            }
+//        }
         .sheet(item: $editGroup) { group in
             EditGroupView(group: group) {
                 groups = []

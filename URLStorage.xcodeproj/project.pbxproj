@@ -52,6 +52,7 @@
 		B9CAA1BE29CCBD12004173F4 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = B9CAA1BD29CCBD12004173F4 /* Kingfisher */; };
 		B9DDF24B29D1B71E000701D4 /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B9DDF24A29D1B71E000701D4 /* OpenAI */; };
 		B9DDF24D29D1B734000701D4 /* OpenAIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DDF24C29D1B734000701D4 /* OpenAIHelper.swift */; };
+		C6424598466422AB3FCA9CBF /* Pods_URLVaultWidgetExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2571ABA2F8B841B61E429D0 /* Pods_URLVaultWidgetExtension.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,7 +80,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		079A10018B50F9E23B540CF4 /* Pods-URLVaultWidgetExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-URLVaultWidgetExtension.debug.xcconfig"; path = "Target Support Files/Pods-URLVaultWidgetExtension/Pods-URLVaultWidgetExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		52D2A15653F79ADAD53662CF /* Pods_URLStorage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_URLStorage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		96DCD2ED31C3E79E9D156E88 /* Pods-URLVaultWidgetExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-URLVaultWidgetExtension.release.xcconfig"; path = "Target Support Files/Pods-URLVaultWidgetExtension/Pods-URLVaultWidgetExtension.release.xcconfig"; sourceTree = "<group>"; };
 		B1917C795A4C65CFE71A7E81 /* Pods-URLStorage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-URLStorage.release.xcconfig"; path = "Target Support Files/Pods-URLStorage/Pods-URLStorage.release.xcconfig"; sourceTree = "<group>"; };
 		B4B3479DEFA8F2925C8358E3 /* Pods-URLStorage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-URLStorage.debug.xcconfig"; path = "Target Support Files/Pods-URLStorage/Pods-URLStorage.debug.xcconfig"; sourceTree = "<group>"; };
 		B90C6EE429C2F3EC00A11205 /* AdMobBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdMobBannerView.swift; sourceTree = "<group>"; };
@@ -124,6 +127,7 @@
 		B9CAA1B729CCB6A8004173F4 /* LargeSizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeSizeView.swift; sourceTree = "<group>"; };
 		B9DDF24C29D1B734000701D4 /* OpenAIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIHelper.swift; sourceTree = "<group>"; };
 		B9EE179629C7550B007297A8 /* URLStorage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = URLStorage.entitlements; sourceTree = "<group>"; };
+		C2571ABA2F8B841B61E429D0 /* Pods_URLVaultWidgetExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_URLVaultWidgetExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +150,7 @@
 				B9CAA19829CC2499004173F4 /* SwiftUI.framework in Frameworks */,
 				B9CAA19729CC2499004173F4 /* WidgetKit.framework in Frameworks */,
 				B9CAA1BC29CCBD0B004173F4 /* SwiftSoup in Frameworks */,
+				C6424598466422AB3FCA9CBF /* Pods_URLVaultWidgetExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +298,8 @@
 			children = (
 				B4B3479DEFA8F2925C8358E3 /* Pods-URLStorage.debug.xcconfig */,
 				B1917C795A4C65CFE71A7E81 /* Pods-URLStorage.release.xcconfig */,
+				079A10018B50F9E23B540CF4 /* Pods-URLVaultWidgetExtension.debug.xcconfig */,
+				96DCD2ED31C3E79E9D156E88 /* Pods-URLVaultWidgetExtension.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -303,6 +310,7 @@
 				52D2A15653F79ADAD53662CF /* Pods_URLStorage.framework */,
 				B9CAA17A29CC1CBE004173F4 /* WidgetKit.framework */,
 				B9CAA17C29CC1CBE004173F4 /* SwiftUI.framework */,
+				C2571ABA2F8B841B61E429D0 /* Pods_URLVaultWidgetExtension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -340,6 +348,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B9CAA1A429CC249B004173F4 /* Build configuration list for PBXNativeTarget "URLVaultWidgetExtension" */;
 			buildPhases = (
+				76D7055B743F9B20EE86DE54 /* [CP] Check Pods Manifest.lock */,
 				B9CAA19229CC2499004173F4 /* Sources */,
 				B9CAA19329CC2499004173F4 /* Frameworks */,
 				B9CAA19429CC2499004173F4 /* Resources */,
@@ -436,6 +445,28 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-URLStorage-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		76D7055B743F9B20EE86DE54 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-URLVaultWidgetExtension-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -704,6 +735,7 @@
 		};
 		B9CAA1A529CC249B004173F4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 079A10018B50F9E23B540CF4 /* Pods-URLVaultWidgetExtension.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
@@ -732,6 +764,7 @@
 		};
 		B9CAA1A629CC249B004173F4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96DCD2ED31C3E79E9D156E88 /* Pods-URLVaultWidgetExtension.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;

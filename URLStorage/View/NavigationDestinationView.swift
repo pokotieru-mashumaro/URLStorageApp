@@ -212,6 +212,7 @@ struct NavigationDestinationView: View {
                     Spacer()
                     
                     HStack(spacing: 8) {
+                        
                         Button {
                             widgetButtonFunc(item: item)
                         } label: {

@@ -8,7 +8,7 @@
 import SwiftUI
 import StoreKit
 
-class AppStoreReview {
+final class AppStoreReview {
     /// 起動回数のUserDefaults
     @AppStorage("launchedCount") static var launchedCount = 0
     @AppStorage("firstLaunchedCount") static var firstLaunchedCount = 0

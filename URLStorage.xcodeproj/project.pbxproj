@@ -50,8 +50,7 @@
 		B9CAA1B829CCB6A8004173F4 /* LargeSizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CAA1B729CCB6A8004173F4 /* LargeSizeView.swift */; };
 		B9CAA1BC29CCBD0B004173F4 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = B9CAA1BB29CCBD0B004173F4 /* SwiftSoup */; };
 		B9CAA1BE29CCBD12004173F4 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = B9CAA1BD29CCBD12004173F4 /* Kingfisher */; };
-		B9DDF24B29D1B71E000701D4 /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B9DDF24A29D1B71E000701D4 /* OpenAI */; };
-		B9DDF24D29D1B734000701D4 /* OpenAIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DDF24C29D1B734000701D4 /* OpenAIHelper.swift */; };
+		B9CC67B629DFEC9A00A8F1D8 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = B9CC67B529DFEC9A00A8F1D8 /* GoogleMobileAds */; };
 		C6424598466422AB3FCA9CBF /* Pods_URLVaultWidgetExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2571ABA2F8B841B61E429D0 /* Pods_URLVaultWidgetExtension.framework */; };
 /* End PBXBuildFile section */
 
@@ -125,7 +124,6 @@
 		B9CAA1B229CCB65D004173F4 /* SmallSizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallSizeView.swift; sourceTree = "<group>"; };
 		B9CAA1B429CCB682004173F4 /* MediumSizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumSizeView.swift; sourceTree = "<group>"; };
 		B9CAA1B729CCB6A8004173F4 /* LargeSizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeSizeView.swift; sourceTree = "<group>"; };
-		B9DDF24C29D1B734000701D4 /* OpenAIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIHelper.swift; sourceTree = "<group>"; };
 		B9EE179629C7550B007297A8 /* URLStorage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = URLStorage.entitlements; sourceTree = "<group>"; };
 		C2571ABA2F8B841B61E429D0 /* Pods_URLVaultWidgetExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_URLVaultWidgetExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -137,7 +135,7 @@
 			files = (
 				B9B8AAE529BB47B6007C36CA /* Kingfisher in Frameworks */,
 				B9B8AAE229BB47AC007C36CA /* SwiftSoup in Frameworks */,
-				B9DDF24B29D1B71E000701D4 /* OpenAI in Frameworks */,
+				B9CC67B629DFEC9A00A8F1D8 /* GoogleMobileAds in Frameworks */,
 				5B946A24688E7B3CCBE775CB /* Pods_URLStorage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -234,7 +232,6 @@
 			children = (
 				B9B8AAEE29BB4842007C36CA /* CoreDataHelper.swift */,
 				B93E374329BF33AC00005B50 /* AppStoreReview.swift */,
-				B9DDF24C29D1B734000701D4 /* OpenAIHelper.swift */,
 			);
 			path = Heplers;
 			sourceTree = "<group>";
@@ -338,7 +335,7 @@
 			packageProductDependencies = (
 				B9B8AAE129BB47AC007C36CA /* SwiftSoup */,
 				B9B8AAE429BB47B6007C36CA /* Kingfisher */,
-				B9DDF24A29D1B71E000701D4 /* OpenAI */,
+				B9CC67B529DFEC9A00A8F1D8 /* GoogleMobileAds */,
 			);
 			productName = URLStorage;
 			productReference = B9B8AABB29BB45DE007C36CA /* URLStorage.app */;
@@ -396,7 +393,7 @@
 			packageReferences = (
 				B9B8AAE029BB47AC007C36CA /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 				B9B8AAE329BB47B6007C36CA /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				B9DDF24929D1B71E000701D4 /* XCRemoteSwiftPackageReference "OpenAI" */,
+				B9CC67B429DFEC9A00A8F1D8 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 			);
 			productRefGroup = B9B8AABC29BB45DE007C36CA /* Products */;
 			projectDirPath = "";
@@ -498,7 +495,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9B8AAD929BB46E5007C36CA /* ViewExtension.swift in Sources */,
-				B9DDF24D29D1B734000701D4 /* OpenAIHelper.swift in Sources */,
 				B9B8AAE729BB47CE007C36CA /* addTaskGroupView.swift in Sources */,
 				B90C6EE529C2F3EC00A11205 /* AdMobBannerView.swift in Sources */,
 				B9B8AADD29BB473C007C36CA /* VideoThumbnailView.swift in Sources */,
@@ -840,12 +836,12 @@
 				kind = branch;
 			};
 		};
-		B9DDF24929D1B71E000701D4 /* XCRemoteSwiftPackageReference "OpenAI" */ = {
+		B9CC67B429DFEC9A00A8F1D8 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/MacPaw/OpenAI.git";
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -871,10 +867,10 @@
 			package = B9B8AAE329BB47B6007C36CA /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
 		};
-		B9DDF24A29D1B71E000701D4 /* OpenAI */ = {
+		B9CC67B529DFEC9A00A8F1D8 /* GoogleMobileAds */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B9DDF24929D1B71E000701D4 /* XCRemoteSwiftPackageReference "OpenAI" */;
-			productName = OpenAI;
+			package = B9CC67B429DFEC9A00A8F1D8 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
 		};
 /* End XCSwiftPackageProductDependency section */
 

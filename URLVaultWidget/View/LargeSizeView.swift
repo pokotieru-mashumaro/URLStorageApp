@@ -21,7 +21,6 @@ struct LargeSizeView: View {
             VStack {
                 HStack(spacing: 20) {
                     largeSquare(icon: "house")
-                       // .widgetURL(URL(string: "urlvault://widgetlink?group_title=\(entry.group)"))
                 }
             }
             .offset(y: -10)

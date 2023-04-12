@@ -55,6 +55,10 @@ final class CoreDataHelper {
         newitem.impression = impression
         newitem.group = group
         
+        if group.groupimage == nil {
+            group.groupimage = image
+        }
+        
         group.grouptimestamp = Date()
         
         do {

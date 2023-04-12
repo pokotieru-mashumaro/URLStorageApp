@@ -20,7 +20,6 @@ struct MediumSizeView: View {
             VStack {
                 HStack(spacing: 16) {
                     square(icon: "house")
-                      //  .widgetURL(URL(string: "urlvault://widgetlink?group_title=\(entry.group)"))
                 }
                 .offset(x: -10, y: 40)
                 .hAlign(.trailing)

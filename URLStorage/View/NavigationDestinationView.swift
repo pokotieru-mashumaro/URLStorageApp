@@ -21,6 +21,7 @@ struct NavigationDestinationView: View {
         case noUrl
     }
     @AppStorage("widgetItem") var widgetItemURL = ""
+    @AppStorage("starwidgetItem") var starWidgetItemURL = ""
     @State private var widgetAlert: Bool = false
     @State private var widgetImage: UIImage?
     @State private var widgetImageAlert: Bool = false
@@ -61,7 +62,6 @@ struct NavigationDestinationView: View {
         .onAppear {
             groupItems = helper.getItem(groups: groups)
             reward.loadReward()
-            interstitial.LoadInterstitial()
         }
         .refreshable {
             groupItems = []
@@ -216,7 +216,7 @@ struct NavigationDestinationView: View {
                         Button {
                             widgetButtonFunc(item: item)
                         } label: {
-                            Image(systemName: item.url == widgetItemURL ? "star.fill" : "star")
+                            Image(systemName: item.url == starWidgetItemURL ? "star.fill" : "star")
                                 .frame(width: 20, height: 20)
                         }
                         
@@ -293,8 +293,8 @@ struct NavigationDestinationView: View {
                     reward.showReward()
                     userdefaultSave(item: item)
                     widgetImage = nil
+                    starWidgetItemURL = widgetItemURL
                     WidgetCenter.shared.reloadAllTimelines()
-
                 },
                              secondaryButton: .destructive(Text("キャンセル")))
             case .rewardError:

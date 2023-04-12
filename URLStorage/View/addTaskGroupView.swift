@@ -13,9 +13,7 @@ struct addTaskGroupView: View {
     @EnvironmentObject private var sceneDelegate: MySceneDelegate
     @Environment(\.dismiss) private var dismiss
     
-    private let helper = CoreDataHelper()
-    @ObservedObject private var reward = Reward()
-
+    private let helper = CoreDataHelper()    
     //photo関係
     @State private var selectedImageData: Data?
     @State private var showImagePicker: Bool = false
@@ -26,136 +24,129 @@ struct addTaskGroupView: View {
     var onAdd: () -> ()
     
     var body: some View {
-        ZStack {
-            VStack(alignment: .leading, spacing: 30) {
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "chevron.left")
-                        .foregroundColor(.primary)
-                        .contentShape(Rectangle())
-                }
-                .padding(.top)
+        VStack(alignment: .leading, spacing: 30) {
+            Button {
+                dismiss()
+            } label: {
+                Image(systemName: "chevron.left")
+                    .foregroundColor(.primary)
+                    .contentShape(Rectangle())
+            }
+            .padding(.top)
+            
+            Text("グループ作成")
+                .font(.system(size: 28))
+                .fontWeight(.heavy)
+            
+            VStack(alignment: .leading, spacing: 20) {
+                TitleView("写真(任意)", .gray)
                 
-                Text("グループ作成")
-                    .font(.system(size: 28))
-                    .fontWeight(.heavy)
-                
-                VStack(alignment: .leading, spacing: 20) {
-                    TitleView("写真(任意)", .gray)
-                    
-                    HStack {
-                        photoView()
-                            .padding(.leading, 10)
-                            .overlay {
-                                if selectedImageData != nil {
-                                    Button {
-                                        photoItem = nil
-                                        selectedImageData = nil
-                                    } label: {
-                                        Image(systemName: "xmark.circle.fill")
-                                            .foregroundColor(.gray)
-                                            .font(.system(size: 20))
-                                    }
-                                    .hAlign(.trailing)
-                                    .vAlign(.top)
+                HStack {
+                    photoView()
+                        .padding(.leading, 10)
+                        .overlay {
+                            if selectedImageData != nil {
+                                Button {
+                                    photoItem = nil
+                                    selectedImageData = nil
+                                } label: {
+                                    Image(systemName: "xmark.circle.fill")
+                                        .foregroundColor(.gray)
+                                        .font(.system(size: 20))
                                 }
+                                .hAlign(.trailing)
+                                .vAlign(.top)
                             }
+                        }
+                        .onTapGesture {
+                            showImagePicker.toggle()
+                        }
+                        .hAlign(.leading)
+                }
+            }
+            
+            VStack(alignment: .leading, spacing: 10) {
+                TitleView("タイトル", .gray)
+                
+                TextField("タイトル（必須）", text: $titleText)
+                    .font(.system(size: 16))
+                
+                Rectangle()
+                    .fill(.primary.opacity(0.2))
+                    .frame(height: 1)
+                
+                TitleView("カラー", .gray)
+                    .padding(.top, 15)
+                
+                LazyVGrid(columns: Array(repeating: .init(.flexible(), spacing: 20), count: 3), spacing: 15) {
+                    ForEach(GroupColor.allCases, id: \.rawValue) { color in
+                        Text("")
+                            .hAlign(.center)
+                            .padding(.vertical, 5)
+                            .background {
+                                RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                    .fill(color.color.opacity(0.25))
+                            }
+                            .contentShape(Rectangle())
                             .onTapGesture {
-                                showImagePicker.toggle()
+                                DispatchQueue.main.async {
+                                    groupColor = color
+                                }
                             }
-                            .hAlign(.leading)
                     }
                 }
-                
-                VStack(alignment: .leading, spacing: 10) {
-                    TitleView("タイトル", .gray)
-                    
-                    TextField("タイトル（必須）", text: $titleText)
-                        .font(.system(size: 16))
-                    
-                    Rectangle()
-                        .fill(.primary.opacity(0.2))
-                        .frame(height: 1)
-                    
-                    TitleView("カラー", .gray)
-                        .padding(.top, 15)
-                    
-                    LazyVGrid(columns: Array(repeating: .init(.flexible(), spacing: 20), count: 3), spacing: 15) {
-                        ForEach(GroupColor.allCases, id: \.rawValue) { color in
-                            Text("")
-                                .hAlign(.center)
-                                .padding(.vertical, 5)
-                                .background {
-                                    RoundedRectangle(cornerRadius: 5, style: .continuous)
-                                        .fill(color.color.opacity(0.25))
-                                }
-                                .contentShape(Rectangle())
-                                .onTapGesture {
-                                    DispatchQueue.main.async {
-                                        groupColor = color
-                                    }
-                                }
-                        }
-                    }
-                    .padding(.top, 5)
-                }
-                
-                Button {
-//                    guard reward.rewardLoaded else {
-//                        reward.loadReward()
-//                        return
-//                    }
-//                    reward.showReward()
-                    let color = groupColor.name
-                    helper.groupSave(context: context, title: titleText, color: color, image: selectedImageData)
-                    onAdd()
-                    dismiss()
-                } label: {
-                    Text("作成")
-                        .font(.title3)
-                        .fontWeight(.semibold)
-                        .frame(width: 300, height: 50)
-                        .foregroundColor(.white)
-                        .background {
-                            Capsule()
-                                .fill(groupColor.color.gradient)
-                        }
-                }
-                .padding(.bottom)
-                .hAlign(.center)
-                .vAlign(.bottom)
-                .disabled(titleText == "")
-                .opacity(titleText == "" ? 0.6 : 1)
-                
-                Text("")
-                    .padding(.bottom, 40)
-                
+                .padding(.top, 5)
             }
-            .padding(.horizontal, 15)
-            .photosPicker(isPresented: $showImagePicker, selection: $photoItem)
-            .onChange(of: photoItem) { newvalue in
-                if let newvalue {
-                    Task {
-                        do {
-                            guard let imageData = try await newvalue.loadTransferable(type: Data.self) else { return }
-                            //MARK: UI Must Be Updated on Main Thread
-                            await MainActor.run(body: {
-                                selectedImageData = imageData
-                            })
-                        } catch {
-                            print(error.localizedDescription)
-                        }
+            
+            Button {
+                let color = groupColor.name
+                helper.groupSave(context: context, title: titleText, color: color, image: selectedImageData)
+                onAdd()
+                dismiss()
+            } label: {
+                Text("作成")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .frame(width: 300, height: 50)
+                    .foregroundColor(.white)
+                    .background {
+                        Capsule()
+                            .fill(groupColor.color.gradient)
+                    }
+            }
+            .padding(.bottom)
+            .hAlign(.center)
+            .vAlign(.bottom)
+            .disabled(titleText == "")
+            .opacity(titleText == "" ? 0.6 : 1)
+     
+            Text("")
+                .padding(.bottom, 40)
+            
+        }
+        .padding(.horizontal, 15)
+        .photosPicker(isPresented: $showImagePicker, selection: $photoItem)
+        .onChange(of: photoItem) { newvalue in
+            if let newvalue {
+                Task {
+                    do {
+                        guard let imageData = try await newvalue.loadTransferable(type: Data.self) else { return }
+                        //MARK: UI Must Be Updated on Main Thread
+                        await MainActor.run(body: {
+                            selectedImageData = imageData
+                        })
+                    } catch {
+                        print(error.localizedDescription)
                     }
                 }
             }
-            .overlay {
-                VStack {
-                    Spacer()
-                    if let vc = sceneDelegate.window?.rootViewController {
-                        BannerView(viewController: vc, windowScene: sceneDelegate.windowScene)
-                            .frame(width: 320, height: 50)
-                    }
+        }
+        .overlay {
+            VStack {
+                Spacer()
+                if let vc = sceneDelegate.window?.rootViewController {
+                    BannerView(viewController: vc, windowScene: sceneDelegate.windowScene)
+                        .frame(width: 320, height: 50)
                 }
             }
         }

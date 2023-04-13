@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5B946A24688E7B3CCBE775CB /* Pods_URLStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D2A15653F79ADAD53662CF /* Pods_URLStorage.framework */; };
 		B90C6EE529C2F3EC00A11205 /* AdMobBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90C6EE429C2F3EC00A11205 /* AdMobBannerView.swift */; };
 		B90C6EE829C3268C00A11205 /* AdMobInterstitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90C6EE729C3268C00A11205 /* AdMobInterstitialView.swift */; };
 		B93E374429BF33AC00005B50 /* AppStoreReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93E374329BF33AC00005B50 /* AppStoreReview.swift */; };
 		B96B80AE29BE07EF00C6FF73 /* FullScreenImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96B80AD29BE07EF00C6FF73 /* FullScreenImageView.swift */; };
+		B9779FC929E7E24F00F8D152 /* Pods_URLStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D2A15653F79ADAD53662CF /* Pods_URLStorage.framework */; };
+		B9779FD029E7E4E400F8D152 /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9779FCC29E7E2AA00F8D152 /* GoogleUtilities.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		B999219629BDE78900FAAE24 /* EditGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B999219529BDE78900FAAE24 /* EditGroupView.swift */; };
 		B999219829BDEC2300FAAE24 /* EditItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B999219729BDEC2300FAAE24 /* EditItemView.swift */; };
 		B9B8AABF29BB45DE007C36CA /* URLStorageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B8AABE29BB45DE007C36CA /* URLStorageApp.swift */; };
@@ -88,6 +89,7 @@
 		B90C6EE729C3268C00A11205 /* AdMobInterstitialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdMobInterstitialView.swift; sourceTree = "<group>"; };
 		B93E374329BF33AC00005B50 /* AppStoreReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreReview.swift; sourceTree = "<group>"; };
 		B96B80AD29BE07EF00C6FF73 /* FullScreenImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenImageView.swift; sourceTree = "<group>"; };
+		B9779FCC29E7E2AA00F8D152 /* GoogleUtilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleUtilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B999219529BDE78900FAAE24 /* EditGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGroupView.swift; sourceTree = "<group>"; };
 		B999219729BDEC2300FAAE24 /* EditItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemView.swift; sourceTree = "<group>"; };
 		B9B8AABB29BB45DE007C36CA /* URLStorage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = URLStorage.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,8 +137,9 @@
 			files = (
 				B9B8AAE529BB47B6007C36CA /* Kingfisher in Frameworks */,
 				B9B8AAE229BB47AC007C36CA /* SwiftSoup in Frameworks */,
+				B9779FC929E7E24F00F8D152 /* Pods_URLStorage.framework in Frameworks */,
+				B9779FD029E7E4E400F8D152 /* GoogleUtilities.framework in Frameworks */,
 				B9CC67B629DFEC9A00A8F1D8 /* GoogleMobileAds in Frameworks */,
-				5B946A24688E7B3CCBE775CB /* Pods_URLStorage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,6 +307,7 @@
 		E3E55E32637F3324A32FF772 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B9779FCC29E7E2AA00F8D152 /* GoogleUtilities.framework */,
 				52D2A15653F79ADAD53662CF /* Pods_URLStorage.framework */,
 				B9CAA17A29CC1CBE004173F4 /* WidgetKit.framework */,
 				B9CAA17C29CC1CBE004173F4 /* SwiftUI.framework */,
@@ -478,13 +482,16 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-URLStorage/Pods-URLStorage-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-URLStorage/Pods-URLStorage-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-URLStorage/Pods-URLStorage-frameworks.sh\"\n";
+			shellScript = "
+";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
